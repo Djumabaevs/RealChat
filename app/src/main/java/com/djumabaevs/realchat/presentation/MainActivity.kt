@@ -1,4 +1,4 @@
-package com.djumabaevs.realchat
+package com.djumabaevs.realchat.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -6,11 +6,8 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.djumabaevs.realchat.ui.theme.RealChatTheme
+import com.djumabaevs.realchat.presentation.ui.theme.RealChatTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

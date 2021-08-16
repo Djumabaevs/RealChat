@@ -1,4 +1,4 @@
-package com.djumabaevs.realchat.ui.theme
+package com.djumabaevs.realchat.presentation.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
