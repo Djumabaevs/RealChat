@@ -12,20 +12,16 @@ private val DarkColorPalette = darkColors(
     background = DarkGray,
     onBackground = TextWhite,
     onPrimary = DarkGray,
+    surface = MediumGray,
+    onSurface = LightGray
 )
 
 
 
 @Composable
-fun RealChatTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable() () -> Unit) {
-    val colors = if (darkTheme) {
-        DarkColorPalette
-    } else {
-        LightColorPalette
-    }
-
+fun RealChatTheme(content: @Composable () -> Unit) {
     MaterialTheme(
-        colors = colors,
+        colors = DarkColorPalette,
         typography = Typography,
         shapes = Shapes,
         content = content
