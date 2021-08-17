@@ -41,7 +41,7 @@ class SplashScreenTest {
     }
 
     @Test
-    fun splashScreen_displaysAndDisappears() = coroutineRule.runBlockingTest {
+    fun splashScreen_displaysAndDisappears() = runBlockingTest {
         composeTestRule.setContent {
             RealChatTheme {
                 SplashScreen(navController = navController)
