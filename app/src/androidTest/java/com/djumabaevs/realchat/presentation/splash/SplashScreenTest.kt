@@ -9,6 +9,7 @@ import com.djumabaevs.realchat.presentation.MainActivity
 import com.djumabaevs.realchat.presentation.ui.theme.RealChatTheme
 import com.djumabaevs.realchat.presentation.util.Screen
 import com.djumabaevs.realchat.util.Constants
+import com.djumabaevs.realchat.util.MainCoroutineScopeRule
 import io.mockk.MockKAnnotations
 import io.mockk.impl.annotations.RelaxedMockK
 import io.mockk.verify
@@ -28,6 +29,9 @@ class SplashScreenTest {
     @get:Rule
     val composeTestRule = createAndroidComposeRule<MainActivity>()
 
+    @get:Rule
+    val coroutineRule = MainCoroutineScopeRule()
+
     @RelaxedMockK
     lateinit var navController: NavController
 
@@ -37,7 +41,7 @@ class SplashScreenTest {
     }
 
     @Test
-    fun splashScreen_displaysAndDisappears() = runBlockingTest {
+    fun splashScreen_displaysAndDisappears() = coroutineRule.runBlockingTest {
         composeTestRule.setContent {
             RealChatTheme {
                 SplashScreen(navController = navController)
