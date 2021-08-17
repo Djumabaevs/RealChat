@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.djumabaevs.realchat.presentation.login.LoginScreen
 import com.djumabaevs.realchat.presentation.splash.SplashScreen
 
 @Composable
@@ -18,7 +19,7 @@ fun Navigation() {
             SplashScreen(navController = navController)
         }
         composable(Screen.LoginScreen.route) {
-
+            LoginScreen(navController = navController)
         }
     }
 }
