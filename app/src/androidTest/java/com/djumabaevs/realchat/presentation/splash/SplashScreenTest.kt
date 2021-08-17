@@ -3,11 +3,15 @@ package com.djumabaevs.realchat.presentation.splash
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.navigation.NavController
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import com.djumabaevs.realchat.presentation.MainActivity
 import com.djumabaevs.realchat.presentation.ui.theme.RealChatTheme
+import com.djumabaevs.realchat.presentation.util.Screen
+import com.djumabaevs.realchat.util.Constants
 import io.mockk.MockKAnnotations
 import io.mockk.impl.annotations.RelaxedMockK
+import io.mockk.verify
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runBlockingTest
@@ -18,7 +22,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @ExperimentalCoroutinesApi
-@RunWith(AndroidJUnit4ClassRunner::class)
+@RunWith(AndroidJUnit4::class)
 class SplashScreenTest {
 
     @get:Rule
@@ -41,6 +45,12 @@ class SplashScreenTest {
         }
         composeTestRule
             .onNodeWithContentDescription("Logo")
+            .assertExists()
+
+        verify {
+            navController.popBackStack()
+            navController.navigate(Screen.LoginScreen.route)
+        }
     }
 
 }
