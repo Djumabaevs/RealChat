@@ -18,17 +18,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.djumabaevs.realchat.domain.models.Post
-import com.djumabaevs.realchat.presentation.ui.theme.MediumGray
-import com.djumabaevs.realchat.presentation.ui.theme.ProfilePictureSizeMedium
-import com.djumabaevs.realchat.presentation.ui.theme.SpaceMedium
 import com.djumabaevs.realchat.R
+import com.djumabaevs.realchat.presentation.ui.theme.*
+import com.djumabaevs.realchat.util.Constants
 
 @Composable
 fun Post(
@@ -61,7 +66,67 @@ fun Post(
             Column(modifier = Modifier
                 .fillMaxWidth()
                 .padding(SpaceMedium)) {
-                ActionRow()
+                ActionRow(
+                    username = "Philipp Lackner",
+                    modifier = Modifier.fillMaxWidth(),
+                    onLikeClick = { isLiked ->
+
+                    },
+                    onCommentClick = {
+
+                    },
+                    onShareClick = {
+
+                    },
+                    onUsernameClick = { username ->
+
+                    }
+                )
+                Spacer(modifier = Modifier.height(SpaceSmall))
+                Text(
+                    text = buildAnnotatedString {
+                        append(post.description)
+                        withStyle(
+                            SpanStyle(
+                                color = HintGray,
+                            )
+                        ) {
+                            append(
+                                LocalContext.current.getString(
+                                    R.string.read_more
+                                )
+                            )
+                        }
+                    },
+                    style = MaterialTheme.typography.body2,
+                    overflow = TextOverflow.Ellipsis,
+                    maxLines = Constants.MAX_POST_DESCRIPTION_LINES
+                )
+                Spacer(modifier = Modifier.height(SpaceMedium))
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        text = stringResource(
+                            id = R.string.liked_by_x_people,
+                            post.likeCount
+                        ),
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp,
+                        style = MaterialTheme.typography.h2
+                    )
+                    Text(
+                        text = stringResource(
+                            id = R.string.x_comments,
+                            post.commentCount
+                        ),
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp,
+                        style = MaterialTheme.typography.h2
+                    )
+                }
 
             }
         }
@@ -131,9 +196,9 @@ fun EngagementButtons(
                     TextWhite
                 },
                 contentDescription = if (isLiked) {
-                    stringResource(id = androidx.compose.foundation.layout.R.string.unlike)
+                    stringResource(id = R.string.unlike)
                 } else {
-                    stringResource(id = androidx.compose.foundation.layout.R.string.like)
+                    stringResource(id = R.string.like)
                 }
             )
         }
@@ -146,7 +211,7 @@ fun EngagementButtons(
         ) {
             Icon(
                 imageVector = Icons.Filled.Comment,
-                contentDescription = stringResource(id = androidx.compose.foundation.layout.R.string.comment)
+                contentDescription = stringResource(id = R.string.comment)
             )
         }
         Spacer(modifier = Modifier.width(SpaceMedium))
@@ -158,7 +223,7 @@ fun EngagementButtons(
         ) {
             Icon(
                 imageVector = Icons.Filled.Share,
-                contentDescription = stringResource(id = androidx.compose.foundation.layout.R.string.share)
+                contentDescription = stringResource(id = R.string.share)
             )
         }
     }
