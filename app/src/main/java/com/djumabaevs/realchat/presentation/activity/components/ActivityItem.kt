@@ -27,7 +27,7 @@ import com.djumabaevs.realchat.presentation.ui.theme.SpaceSmall
 @Composable
 fun ActivityItem(
     activity: Activity,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Card(
         shape = MaterialTheme.shapes.medium,
@@ -41,13 +41,13 @@ fun ActivityItem(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            val fillerText = when (activity.actionType) {
+            val fillerText = when(activity.actionType) {
                 is ActivityAction.LikedPost ->
                     stringResource(id = R.string.liked)
                 is ActivityAction.CommentedOnPost ->
                     stringResource(id = R.string.commented_on)
             }
-            val actionText = when (activity.actionType) {
+            val actionText = when(activity.actionType) {
                 is ActivityAction.LikedPost ->
                     stringResource(id = R.string.your_post)
                 is ActivityAction.CommentedOnPost ->
@@ -64,7 +64,7 @@ fun ActivityItem(
                         append(actionText)
                     }
                 },
-                fontSize = 12.dp,
+                fontSize = 12.sp,
                 color = MaterialTheme.colors.onBackground
             )
             Text(
@@ -73,9 +73,6 @@ fun ActivityItem(
                 fontSize = 12.sp,
                 color = MaterialTheme.colors.onBackground
             )
-
         }
-
     }
-
 }
