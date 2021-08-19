@@ -4,6 +4,6 @@ import com.djumabaevs.realchat.domain.util.ActivityAction
 
 data class Activity(
     val username: String,
-    val activityType: ActivityAction,
+    val actionType: ActivityAction,
     val formattedTime: String
 )
