@@ -4,5 +4,5 @@ import androidx.compose.runtime.Composable
 
 @Composable
 fun Post(
-post: Post,
+    post: Post,
 )
