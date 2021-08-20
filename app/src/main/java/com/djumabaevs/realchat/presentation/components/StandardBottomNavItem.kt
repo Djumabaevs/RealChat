@@ -3,6 +3,7 @@ package com.djumabaevs.realchat.presentation.components
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -32,6 +33,16 @@ fun RowScope.StandardBottomNavItem(
         animationSpec = tween(
             durationMillis = 300
         )
+    )
+
+    BottomNavigationItem(
+        selected = selected,
+        onClick = onClick,
+        modifier = modifier,
+        enabled = enabled,
+        selectedContentColor = selectedColor,
+        unselectedContentColor = unselectedColor,
+
     )
 
 }
