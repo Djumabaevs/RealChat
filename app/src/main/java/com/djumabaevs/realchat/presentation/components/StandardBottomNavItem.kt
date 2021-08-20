@@ -1,5 +1,7 @@
 package com.djumabaevs.realchat.presentation.components
 
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -21,5 +23,15 @@ fun RowScope.StandardBottomNavItem(
     enabled: Boolean = true,
     onClick: () -> Unit
 ) {
+
+    if (alertCount != null && alertCount < 0) {
+        throw IllegalArgumentException("Alert count can't be negative")
+    }
+    val lineLength = animateFloatAsState(
+        targetValue = if(selected) 1f else 0f,
+        animationSpec = tween(
+            durationMillis = 300
+        )
+    )
 
 }
