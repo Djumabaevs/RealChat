@@ -2,13 +2,18 @@ package com.djumabaevs.realchat.presentation.components
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.unit.dp
 import com.djumabaevs.realchat.presentation.ui.theme.HintGray
 
 @Composable
@@ -42,7 +47,33 @@ fun RowScope.StandardBottomNavItem(
         enabled = enabled,
         selectedContentColor = selectedColor,
         unselectedContentColor = unselectedColor,
+        icon = {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(SpaceSmall)
+                    .drawBehind {
+                        if(lineLength.value > 0f) {
+                            drawLine(
+                                color = if (selected) selectedColor
+                                else unselectedColor,
+                                start = Offset(
+                                    size.width / 2f - lineLength.value * 15.dp.toPx(),
+                                    size.height
+                                ),
+                                end = Offset(
+                                    size.width / 2f + lineLength.value * 15.dp.toPx(),
+                                    size.height
+                                ),
+                                strokeWidth = 2.dp.toPx(),
+                                cap = StrokeCap.Round
+                            )
+                        }
 
+
+                    }
+            )
+        }
     )
 
 }
