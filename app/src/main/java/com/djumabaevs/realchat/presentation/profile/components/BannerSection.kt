@@ -15,6 +15,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.djumabaevs.realchat.R
+import com.djumabaevs.realchat.presentation.ui.theme.SpaceMedium
+import com.djumabaevs.realchat.presentation.ui.theme.SpaceSmall
 import com.djumabaevs.realchat.presentation.util.toPx
 
 @Composable
