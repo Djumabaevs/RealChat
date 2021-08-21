@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
@@ -42,30 +43,33 @@ fun Post(
     showProfileImage: Boolean = true,
     onPostClick: () -> Unit = {}
 ) {
-    Box(modifier = modifier
-        .fillMaxWidth()
-        .padding(SpaceMedium)) {
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(SpaceMedium)
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .offset(
-                    y = if (showProfileImage) {
-                        ProfilePictureSizeMedium / 2f
-                    } else 0.dp
-                )
+                .offset(y = if (showProfileImage) {
+                    ProfilePictureSizeMedium / 2f
+                } else 0.dp)
                 .clip(MaterialTheme.shapes.medium)
                 .shadow(5.dp)
                 .background(MediumGray)
                 .clickable {
-                    onPostClick
+                    onPostClick()
                 }
         ) {
             Image(
                 painterResource(id = R.drawable.kermit),
-                contentDescription = "Post image")
-            Column(modifier = Modifier
-                .fillMaxWidth()
-                .padding(SpaceMedium)) {
+                contentDescription = "Post image"
+            )
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(SpaceMedium)
+            ) {
                 ActionRow(
                     username = "Bakyt Djumabaev",
                     modifier = Modifier.fillMaxWidth(),
@@ -127,44 +131,18 @@ fun Post(
                         style = MaterialTheme.typography.h2
                     )
                 }
-
             }
         }
-    }
-}
-
-@Composable
-fun ActionRow(
-    modifier: Modifier = Modifier,
-    isLiked: Boolean = false,
-    onLikeClick: (Boolean) -> Unit = {},
-    onCommentClick: () -> Unit = {},
-    onShareClick: () -> Unit = {},
-    username: String,
-    onUsernameClick: (String) -> Unit = {}
-) {
-    Row(
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = modifier,
-    ) {
-        Text(
-            text = username,
-            style = TextStyle(
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colors.primary
-            ),
-            modifier = Modifier
-                .clickable {
-                    onUsernameClick(username)
-                }
-        )
-        EngagementButtons(
-            isLiked = isLiked,
-            onLikeClick = onLikeClick,
-            onCommentClick = onCommentClick,
-            onShareClick = onShareClick
-        )
+        if (showProfileImage) {
+            Image(
+                painterResource(id = R.drawable.bakyt),
+                contentDescription = "Profile picture",
+                modifier = Modifier
+                    .size(ProfilePictureSizeMedium)
+                    .clip(CircleShape)
+                    .align(Alignment.TopCenter)
+            )
+        }
     }
 }
 
@@ -226,5 +204,40 @@ fun EngagementButtons(
                 contentDescription = stringResource(id = R.string.share)
             )
         }
+    }
+}
+
+@Composable
+fun ActionRow(
+    modifier: Modifier = Modifier,
+    isLiked: Boolean = false,
+    onLikeClick: (Boolean) -> Unit = {},
+    onCommentClick: () -> Unit = {},
+    onShareClick: () -> Unit = {},
+    username: String,
+    onUsernameClick: (String) -> Unit = {}
+) {
+    Row(
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier,
+    ) {
+        Text(
+            text = username,
+            style = TextStyle(
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colors.primary
+            ),
+            modifier = Modifier
+                .clickable {
+                    onUsernameClick(username)
+                }
+        )
+        EngagementButtons(
+            isLiked = isLiked,
+            onLikeClick = onLikeClick,
+            onCommentClick = onCommentClick,
+            onShareClick = onShareClick
+        )
     }
 }

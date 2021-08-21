@@ -56,7 +56,7 @@ fun PostDetailScreen(
                         .fillMaxWidth()
                         .background(MaterialTheme.colors.background)
                 ) {
-                    Spacer(modifier = androidx.compose.ui.Modifier.height(SpaceLarge))
+                    Spacer(modifier = Modifier.height(SpaceLarge))
                     Box(
                         modifier = Modifier
                             .fillMaxSize()
@@ -95,12 +95,12 @@ fun PostDetailScreen(
 
                                     }
                                 )
-                                Spacer(modifier = androidx.compose.ui.Modifier.height(SpaceSmall))
+                                Spacer(modifier = Modifier.height(SpaceSmall))
                                 Text(
                                     text = post.description,
                                     style = MaterialTheme.typography.body2,
                                 )
-                                Spacer(modifier = androidx.compose.ui.Modifier.height(SpaceMedium))
+                                Spacer(modifier = Modifier.height(SpaceMedium))
                                 Text(
                                     text = stringResource(
                                         id = R.string.liked_by_x_people,
@@ -113,7 +113,7 @@ fun PostDetailScreen(
 
                         }
                         Image(
-                            painterResource(id = R.drawable.imagebro),
+                            painterResource(id = R.drawable.bakyt),
                             contentDescription = "Profile picture",
                             modifier = Modifier
                                 .size(ProfilePictureSizeMedium)
@@ -123,7 +123,7 @@ fun PostDetailScreen(
 
                     }
                 }
-                Spacer(modifier = androidx.compose.ui.Modifier.height(SpaceLarge))
+                Spacer(modifier = Modifier.height(SpaceLarge))
             }
             items(20) {
                 Comment(
@@ -174,7 +174,7 @@ fun Comment(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Image(
-                        painter = painterResource(id = R.drawable.imagebro),
+                        painter = painterResource(id = R.drawable.bakyt),
                         contentDescription = null,
                         modifier = Modifier
                             .clip(CircleShape)
