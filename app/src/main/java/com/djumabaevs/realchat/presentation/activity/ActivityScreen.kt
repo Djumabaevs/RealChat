@@ -48,7 +48,7 @@ fun ActivityScreen(
             items(20) {
                 ActivityItem(
                     activity = Activity(
-                        "Philipp Lackner",
+                        "Bakyt Djumabaev",
                         actionType = if(Random.nextInt(2) == 0) {
                             ActivityAction.LikedPost
                         } else ActivityAction.CommentedOnPost,

@@ -93,6 +93,6 @@ fun StandardScaffold (
         floatingActionButtonPosition = FabPosition.Center,
         modifier = modifier
             ) {
-
+            content()
     }
 }

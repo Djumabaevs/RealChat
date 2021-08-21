@@ -56,8 +56,8 @@ fun MainFeedScreen (
                 description = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed\n" +
                         "diam nonumy eirmod tempor invidunt ut labore et dolore \n" +
                         "magna aliquyam erat, sed diam voluptua...",
-                likeCount = 17,
-                commentCount = 7
+                likeCount = 10,
+                commentCount = 5
             ),
             onPostClick = {
                 navController.navigate(Screen.PostDetailScreen.route)

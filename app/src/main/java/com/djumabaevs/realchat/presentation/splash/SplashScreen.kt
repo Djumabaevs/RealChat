@@ -54,7 +54,7 @@ fun SplashScreen(
         contentAlignment = Alignment.Center
     ) {
         Image(
-            painter = painterResource(id = androidx.compose.runtime.R.drawable.ic_logo),
+            painter = painterResource(id = R.drawable.ic_logo),
             contentDescription = "Logo",
             modifier = Modifier.scale(scale.value)
         )

@@ -1,4 +1,4 @@
-package com.djumabaevs.realchat.presentation.ui.theme
+    package com.djumabaevs.realchat.presentation.ui.theme
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors

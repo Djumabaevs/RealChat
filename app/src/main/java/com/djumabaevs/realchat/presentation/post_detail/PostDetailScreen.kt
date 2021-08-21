@@ -174,7 +174,7 @@ fun Comment(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Image(
-                        painter = painterResource(id = R.drawable.philipp),
+                        painter = painterResource(id = R.drawable.imagebro),
                         contentDescription = null,
                         modifier = Modifier
                             .clip(CircleShape)
