@@ -17,40 +17,44 @@ import androidx.navigation.NavController
 import com.djumabaevs.realchat.R
 import com.djumabaevs.realchat.presentation.util.Screen
 import com.djumabaevs.realchat.util.Constants
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.withContext
 
 @Composable
 fun SplashScreen(
-    navController: NavController
+    navController: NavController,
+    dispatcher: CoroutineDispatcher = Dispatchers.Main
 ) {
     val scale = remember {
         Animatable(0f)
     }
-    val overShootInterpolator = remember {
+    val overshootInterpolator = remember {
         OvershootInterpolator(2f)
     }
-
     LaunchedEffect(key1 = true) {
-        scale.animateTo(
-            targetValue = 0.5f,
-            animationSpec = tween(
-                durationMillis = 1000,
-                easing = {
-                    overShootInterpolator.getInterpolation(it)
-                }
+        withContext(dispatcher) {
+            scale.animateTo(
+                targetValue = 0.5f,
+                animationSpec = tween(
+                    durationMillis = 500,
+                    easing = {
+                        overshootInterpolator.getInterpolation(it)
+                    }
+                )
             )
-        )
-        delay(Constants.SPLASH_SCREEN_DURATION)
-        navController.popBackStack()
-        navController.navigate(Screen.LoginScreen.route)
+            delay(Constants.SPLASH_SCREEN_DURATION)
+            navController.popBackStack()
+            navController.navigate(Screen.LoginScreen.route)
+        }
     }
-
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
         Image(
-            painter = painterResource(id = R.drawable.ic_logo),
+            painter = painterResource(id = androidx.compose.runtime.R.drawable.ic_logo),
             contentDescription = "Logo",
             modifier = Modifier.scale(scale.value)
         )

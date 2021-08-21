@@ -10,6 +10,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.djumabaevs.realchat.presentation.components.StandardScaffold
 import com.djumabaevs.realchat.presentation.ui.theme.RealChatTheme
 import com.djumabaevs.realchat.presentation.util.Navigation
 import com.djumabaevs.realchat.presentation.util.Screen

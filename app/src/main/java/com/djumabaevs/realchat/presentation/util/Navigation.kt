@@ -15,6 +15,7 @@ import com.djumabaevs.realchat.presentation.create_post.CreatePostScreen
 import com.djumabaevs.realchat.presentation.login.LoginScreen
 import com.djumabaevs.realchat.presentation.main_feed.MainFeedScreen
 import com.djumabaevs.realchat.presentation.post_detail.PostDetailScreen
+import com.djumabaevs.realchat.presentation.profile.ProfileScreen
 import com.djumabaevs.realchat.presentation.register.RegisterScreen
 import com.djumabaevs.realchat.presentation.splash.SplashScreen
 

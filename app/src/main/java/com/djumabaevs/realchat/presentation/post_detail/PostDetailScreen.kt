@@ -21,6 +21,9 @@ import androidx.navigation.NavController
 import com.djumabaevs.realchat.domain.models.Post
 import com.djumabaevs.realchat.R
 import com.djumabaevs.realchat.domain.models.Comment
+import com.djumabaevs.realchat.presentation.components.ActionRow
+import com.djumabaevs.realchat.presentation.components.StandardToolbar
+import com.djumabaevs.realchat.presentation.ui.theme.*
 
 @Composable
 fun PostDetailScreen(
