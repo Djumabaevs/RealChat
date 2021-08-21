@@ -52,7 +52,7 @@ fun Navigation(navController: NavHostController) {
             PostDetailScreen(
                 navController = navController,
                 post = Post(
-                    username = "Philipp Lackner",
+                    username = "Bakyt Djumabaev",
                     imageUrl = "",
                     profilePictureUrl = "",
                     description = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed\n" +
