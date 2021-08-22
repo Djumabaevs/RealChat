@@ -15,6 +15,7 @@ import io.mockk.impl.annotations.RelaxedMockK
 import io.mockk.verify
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert.*
 import org.junit.Before
@@ -29,11 +30,10 @@ class SplashScreenTest {
     @get:Rule
     val composeTestRule = createAndroidComposeRule<MainActivity>()
 
-    @get:Rule
-    val coroutineRule = MainCoroutineScopeRule()
-
     @RelaxedMockK
     lateinit var navController: NavController
+
+    private val testDispatcher = TestCoroutineDispatcher()
 
     @Before
     fun setUp() {
@@ -41,20 +41,25 @@ class SplashScreenTest {
     }
 
     @Test
-    fun splashScreen_displaysAndDisappears() = runBlockingTest {
+    fun splashScreen_displaysAndDisappears() = testDispatcher.runBlockingTest {
         composeTestRule.setContent {
             RealChatTheme {
-                SplashScreen(navController = navController)
+                SplashScreen(
+                    navController = navController,
+                    dispatcher = testDispatcher
+                )
             }
         }
+
         composeTestRule
             .onNodeWithContentDescription("Logo")
             .assertExists()
+
+        advanceTimeBy(Constants.SPLASH_SCREEN_DURATION)
 
         verify {
             navController.popBackStack()
             navController.navigate(Screen.LoginScreen.route)
         }
     }
-
 }
