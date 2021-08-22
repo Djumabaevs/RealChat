@@ -2,16 +2,24 @@ package com.djumabaevs.realchat.presentation.profile.components
 
 import android.graphics.Paint
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.djumabaevs.realchat.domain.models.User
 import com.djumabaevs.realchat.presentation.ui.theme.SpaceSmall
+import com.djumabaevs.realchat.R
+import com.djumabaevs.realchat.presentation.ui.theme.SpaceLarge
+import com.djumabaevs.realchat.presentation.ui.theme.SpaceMedium
 
 @Composable
 fun ProfileHeaderSection(
@@ -42,10 +50,22 @@ fun ProfileHeaderSection(
             )
             if(isOwnProfile) {
                 Spacer(modifier = Modifier.width(SpaceSmall))
+                IconButton(
+                    onClick = onEditClick,
+                    modifier = Modifier.size(30.dp)) {
+                    Icon(
+                        imageVector = Icons.Default.Edit,
+                        contentDescription = stringResource(id = R.string.edit)
+                    )
+                }
             }
-
-
         }
-
+        Spacer(modifier = Modifier.height(SpaceMedium))
+        Text(
+            text = user.description,
+            style = MaterialTheme.typography.body2,
+            textAlign = TextAlign.Center
+        )
+        Spacer(modifier = Modifier.height(SpaceLarge))
     }
 }
