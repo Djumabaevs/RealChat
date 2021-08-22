@@ -67,5 +67,6 @@ fun ProfileHeaderSection(
             textAlign = TextAlign.Center
         )
         Spacer(modifier = Modifier.height(SpaceLarge))
+        ProfileStats(user = user, isOwnProfile = isOwnProfile)
     }
 }
