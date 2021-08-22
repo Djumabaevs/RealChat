@@ -3,6 +3,7 @@ package com.djumabaevs.realchat.presentation.profile.components
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
@@ -12,6 +13,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import com.djumabaevs.realchat.R
+import com.djumabaevs.realchat.domain.models.User
+import com.djumabaevs.realchat.presentation.ui.theme.SpaceLarge
 
 @Composable
 fun ProfileStats(
