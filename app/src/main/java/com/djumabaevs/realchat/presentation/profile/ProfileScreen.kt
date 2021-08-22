@@ -3,13 +3,14 @@ package com.djumabaevs.realchat.presentation.profile
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.layout.R
+
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import com.djumabaevs.realchat.R
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
@@ -23,8 +24,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.djumabaevs.realchat.domain.models.User
+import com.djumabaevs.realchat.presentation.components.Post
+import com.djumabaevs.realchat.presentation.profile.components.BannerSection
+import com.djumabaevs.realchat.presentation.profile.components.ProfileHeaderSection
 import com.djumabaevs.realchat.presentation.ui.theme.ProfilePictureSizeLarge
+import com.djumabaevs.realchat.presentation.ui.theme.SpaceMedium
 import com.djumabaevs.realchat.presentation.ui.theme.SpaceSmall
+import com.djumabaevs.realchat.presentation.util.Screen
 import com.djumabaevs.realchat.presentation.util.toPx
 
 @Composable
@@ -106,11 +113,11 @@ fun ProfileScreen(navController: NavController) {
             }
             items(20) {
                 Spacer(
-                    modifier = androidx.compose.ui.Modifier
+                    modifier = Modifier
                         .height(SpaceMedium)
                 )
                 Post(
-                    post = Post(
+                    post = com.djumabaevs.realchat.domain.models.Post(
                         username = "Bakyt Djumabaev",
                         imageUrl = "",
                         profilePictureUrl = "",
@@ -155,7 +162,7 @@ fun ProfileScreen(navController: NavController) {
                     }
             )
             Image(
-                painter = painterResource(id = R.drawable.philipp),
+                painter = painterResource(id = R.drawable.bakyt),
                 contentDescription = stringResource(id = R.string.profile_image),
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
