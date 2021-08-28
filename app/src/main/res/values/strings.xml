@@ -39,4 +39,18 @@
     <string name="posts">Posts</string>
     <string name="unfollow">Unfollow</string>
     <string name="follow">Follow</string>
+    <string name="edit_your_profile">Edit your profile</string>
+    <string name="github_profile_url">GitHub Profile URL</string>
+    <string name="instagram_profile_url">Instagram Profile URL</string>
+    <string name="linked_in_profile_url">LinkedIn Profile URL</string>
+    <string name="your_bio">Your bio</string>
+    <string name="select_top_3_skills">Select your top 3 skills:</string>
+    <string name="save_changes">Save changes</string>
+    <string name="search_for_users">Search for users</string>
+    <string name="search">Search...</string>
+    <string name="create_a_new_post">Create a new post</string>
+    <string name="create_post">Create post</string>
+    <string name="choose_image">Choose image</string>
+    <string name="post">Post</string>
+    <string name="description">Description</string>
 </resources>

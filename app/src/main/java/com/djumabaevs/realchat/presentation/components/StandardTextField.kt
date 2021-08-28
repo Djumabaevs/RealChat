@@ -21,6 +21,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import com.djumabaevs.realchat.R
+import com.djumabaevs.realchat.presentation.ui.theme.IconSizeMedium
 import com.djumabaevs.realchat.presentation.util.TestTags
 
 @Composable
