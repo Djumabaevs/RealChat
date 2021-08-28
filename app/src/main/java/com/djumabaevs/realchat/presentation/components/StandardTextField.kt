@@ -102,9 +102,9 @@ fun StandardTextField(
                             },
                             tint = Color.White,
                             contentDescription = if (isPasswordVisible) {
-                                stringResource(id = androidx.compose.material.R.string.password_visible_content_description)
+                                stringResource(id = R.string.password_visible_content_description)
                             } else {
-                                stringResource(id = androidx.compose.material.R.string.password_hidden_content_description)
+                                stringResource(id = R.string.password_hidden_content_description)
                             }
                         )
                     }
