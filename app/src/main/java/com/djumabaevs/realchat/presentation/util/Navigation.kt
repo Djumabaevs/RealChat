@@ -17,6 +17,7 @@ import com.djumabaevs.realchat.presentation.main_feed.MainFeedScreen
 import com.djumabaevs.realchat.presentation.post_detail.PostDetailScreen
 import com.djumabaevs.realchat.presentation.profile.ProfileScreen
 import com.djumabaevs.realchat.presentation.register.RegisterScreen
+import com.djumabaevs.realchat.presentation.search.SearchScreen
 import com.djumabaevs.realchat.presentation.splash.SplashScreen
 
 @Composable
@@ -49,8 +50,14 @@ fun Navigation(navController: NavHostController) {
         composable(Screen.ProfileScreen.route) {
             ProfileScreen(navController = navController)
         }
+        composable(Screen.EditProfileScreen.route) {
+            EditProfileScreen(navController = navController)
+        }
         composable(Screen.CreatePostScreen.route) {
             CreatePostScreen(navController = navController)
+        }
+        composable(Screen.SearchScreen.route) {
+            SearchScreen(navController = navController)
         }
         composable(Screen.PostDetailScreen.route) {
             PostDetailScreen(
