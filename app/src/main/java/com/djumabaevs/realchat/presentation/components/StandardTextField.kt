@@ -2,6 +2,7 @@ package com.djumabaevs.realchat.presentation.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -10,9 +11,11 @@ import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTag
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -27,9 +30,15 @@ fun StandardTextField(
     hint: String = "",
     maxLength: Int = 40,
     error: String = "",
+    style: TextStyle = TextStyle(
+        color = MaterialTheme.colors.onBackground
+    ),
+    singleLine: Boolean = true,
+    maxLines: Int = 1,
+    leadingIcon: ImageVector? = null,
     keyboardType: KeyboardType = KeyboardType.Text,
     isPasswordToggleDisplayed: Boolean = keyboardType == KeyboardType.Password,
-    showPasswordToggle: Boolean = false,
+    isPasswordVisible: Boolean = false,
     onPasswordToggleClick: (Boolean) -> Unit = {},
     onValueChange: (String) -> Unit
 ) {
@@ -44,6 +53,8 @@ fun StandardTextField(
                     onValueChange(it)
                 }
             },
+            maxLines = maxLines,
+            textStyle = style,
             placeholder = {
                 Text(
                     text = hint,
@@ -54,17 +65,28 @@ fun StandardTextField(
             keyboardOptions = KeyboardOptions(
                 keyboardType = keyboardType
             ),
-            visualTransformation = if (!showPasswordToggle && isPasswordToggleDisplayed) {
+            visualTransformation = if (!isPasswordVisible && isPasswordToggleDisplayed) {
                 PasswordVisualTransformation()
             } else {
                 VisualTransformation.None
             },
-            singleLine = true,
-            trailingIcon = {
-                if (isPasswordToggleDisplayed) {
+            singleLine = singleLine,
+            leadingIcon = if (leadingIcon != null) {
+                val icon: @Composable () -> Unit = {
+                    Icon(
+                        imageVector = leadingIcon,
+                        contentDescription = null,
+                        tint = MaterialTheme.colors.onBackground,
+                        modifier = Modifier.size(IconSizeMedium)
+                    )
+                }
+                icon
+            } else null,
+            trailingIcon = if(isPasswordToggleDisplayed) {
+                val icon: @Composable () -> Unit = {
                     IconButton(
                         onClick = {
-                            onPasswordToggleClick(!showPasswordToggle)
+                            onPasswordToggleClick(!isPasswordVisible)
                         },
                         modifier = Modifier
                             .semantics {
@@ -72,28 +94,29 @@ fun StandardTextField(
                             }
                     ) {
                         Icon(
-                            imageVector = if (showPasswordToggle) {
+                            imageVector = if (isPasswordVisible) {
                                 Icons.Filled.VisibilityOff
                             } else {
                                 Icons.Filled.Visibility
                             },
                             tint = Color.White,
-                            contentDescription = if (showPasswordToggle) {
-                                stringResource(id = R.string.password_visible_content_description)
+                            contentDescription = if (isPasswordVisible) {
+                                stringResource(id = androidx.compose.material.R.string.password_visible_content_description)
                             } else {
-                                stringResource(id = R.string.password_hidden_content_description)
+                                stringResource(id = androidx.compose.material.R.string.password_hidden_content_description)
                             }
                         )
                     }
                 }
-            },
+                icon
+            } else null,
             modifier = Modifier
                 .fillMaxWidth()
                 .semantics {
                     testTag = TestTags.STANDARD_TEXT_FIELD
                 }
         )
-        if(error.isNotEmpty()) {
+        if (error.isNotEmpty()) {
             Text(
                 text = error,
                 style = MaterialTheme.typography.body2,
