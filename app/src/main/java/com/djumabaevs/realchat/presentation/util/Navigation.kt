@@ -12,6 +12,7 @@ import com.djumabaevs.realchat.domain.models.Post
 import com.djumabaevs.realchat.presentation.activity.ActivityScreen
 import com.djumabaevs.realchat.presentation.chat.ChatScreen
 import com.djumabaevs.realchat.presentation.create_post.CreatePostScreen
+import com.djumabaevs.realchat.presentation.edit_profile.EditProfileScreen
 import com.djumabaevs.realchat.presentation.login.LoginScreen
 import com.djumabaevs.realchat.presentation.main_feed.MainFeedScreen
 import com.djumabaevs.realchat.presentation.post_detail.PostDetailScreen
