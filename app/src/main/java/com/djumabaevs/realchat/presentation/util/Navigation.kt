@@ -1,6 +1,7 @@
 package com.djumabaevs.realchat.presentation.util
 
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
@@ -21,6 +22,7 @@ import com.djumabaevs.realchat.presentation.register.RegisterScreen
 import com.djumabaevs.realchat.presentation.search.SearchScreen
 import com.djumabaevs.realchat.presentation.splash.SplashScreen
 
+@ExperimentalMaterialApi
 @Composable
 fun Navigation(navController: NavHostController) {
 //    val navController = rememberNavController()

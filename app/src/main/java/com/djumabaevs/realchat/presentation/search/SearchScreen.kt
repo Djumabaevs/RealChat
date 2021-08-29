@@ -71,7 +71,7 @@ fun SearchScreen(
                     UserProfileItem(
                         user = User(
                             profilePictureUrl = "",
-                            username = "Philipp Lackner",
+                            username = "Bakyt Djumabaev",
                             description = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed\n" +
                                     "diam nonumy eirmod tempor invidunt ut labore et dolore \n" +
                                     "magna aliquyam erat, sed diam voluptua",
