@@ -13,8 +13,10 @@ import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performTextClearance
 import androidx.compose.ui.test.performTextInput
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.djumabaevs.realchat.presentation.MainActivity
+import com.djumabaevs.realchat.presentation.util.TestTags.PASSWORD_TOGGLE
 import com.djumabaevs.realchat.presentation.util.TestTags.STANDARD_TEXT_FIELD
 import org.junit.Rule
 import org.junit.Test
@@ -60,5 +62,30 @@ class StandardTextFieldTest {
         composeTestRule
             .onNodeWithTag(STANDARD_TEXT_FIELD)
             .assertTextEquals(expectedString)
+    }
+
+    @Test
+    fun enterPassword_toggleVisibility_passwordVisible() {
+        composeTestRule.setContent {
+            var text by remember {
+                mutableStateOf("")
+            }
+            MaterialTheme {
+                StandardTextField(
+                    text = text,
+                    onValueChange = {
+                        text = it
+                    },
+                    maxLength = 5,
+                    keyboardType = KeyboardType.Password
+                )
+            }
+        }
+        composeTestRule
+            .onNodeWithTag(STANDARD_TEXT_FIELD)
+            .performTextInput("aaaaa")
+
+        composeTestRule
+            .onNodeWithTag(PASSWORD_TOGGLE)
     }
 }
