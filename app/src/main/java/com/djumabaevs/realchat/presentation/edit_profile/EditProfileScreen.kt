@@ -12,6 +12,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Description
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -19,10 +20,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.djumabaevs.realchat.R
@@ -91,6 +95,71 @@ fun EditProfileScreen(
                             StandardTextFieldState(text = it)
                         )
                     }
+                )
+                Spacer(modifier = Modifier.height(SpaceMedium))
+                StandardTextField(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    text = viewModel.githubTextFieldState.value.text,
+                    hint = stringResource(id = androidx.compose.foundation.layout.R.string.github_profile_url),
+                    error = viewModel.githubTextFieldState.value.error,
+                    leadingIcon = ImageVector.vectorResource(id = androidx.compose.foundation.layout.R.drawable.ic_github_icon_1),
+                    onValueChange = {
+                        viewModel.setGithubTextFieldState(
+                            StandardTextFieldState(text = it)
+                        )
+                    }
+                )
+                Spacer(modifier = Modifier.height(SpaceMedium))
+                StandardTextField(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    text = viewModel.instagramTextFieldState.value.text,
+                    hint = stringResource(id = androidx.compose.foundation.layout.R.string.instagram_profile_url),
+                    error = viewModel.instagramTextFieldState.value.error,
+                    leadingIcon = ImageVector.vectorResource(id = androidx.compose.foundation.layout.R.drawable.ic_instagram_glyph_1),
+                    onValueChange = {
+                        viewModel.setInstagramTextFieldState(
+                            StandardTextFieldState(text = it)
+                        )
+                    }
+                )
+                Spacer(modifier = Modifier.height(SpaceMedium))
+                StandardTextField(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    text = viewModel.linkedInTextFieldState.value.text,
+                    hint = stringResource(id = androidx.compose.foundation.layout.R.string.linked_in_profile_url),
+                    error = viewModel.linkedInTextFieldState.value.error,
+                    leadingIcon = ImageVector.vectorResource(id = androidx.compose.foundation.layout.R.drawable.ic_linkedin_icon_1),
+                    onValueChange = {
+                        viewModel.setLinkedInTextFieldState(
+                            StandardTextFieldState(text = it)
+                        )
+                    }
+                )
+                Spacer(modifier = Modifier.height(SpaceMedium))
+                StandardTextField(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    text = viewModel.bioState.value.text,
+                    hint = stringResource(id = androidx.compose.foundation.layout.R.string.your_bio),
+                    error = viewModel.bioState.value.error,
+                    singleLine = false,
+                    maxLines = 3,
+                    leadingIcon = Icons.Default.Description,
+                    onValueChange = {
+                        viewModel.setBioState(
+                            StandardTextFieldState(text = it)
+                        )
+                    }
+                )
+                Spacer(modifier = Modifier.height(SpaceMedium))
+                Text(
+                    text = stringResource(id = androidx.compose.foundation.layout.R.string.select_top_3_skills),
+                    style = MaterialTheme.typography.h2,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.align(Alignment.CenterHorizontally)
                 )
 
             }
