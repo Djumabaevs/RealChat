@@ -34,10 +34,14 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.djumabaevs.realchat.presentation.components.StandardTextField
 import com.djumabaevs.realchat.presentation.components.StandardToolbar
+import com.djumabaevs.realchat.presentation.edit_profile.components.Chip
 import com.djumabaevs.realchat.presentation.ui.theme.ProfilePictureSizeLarge
 import com.djumabaevs.realchat.presentation.ui.theme.SpaceLarge
 import com.djumabaevs.realchat.presentation.ui.theme.SpaceMedium
 import com.djumabaevs.realchat.presentation.util.states.StandardTextFieldState
+import com.google.accompanist.flowlayout.FlowRow
+import com.google.accompanist.flowlayout.MainAxisAlignment
+import kotlin.random.Random
 
 
 @Composable
@@ -101,9 +105,9 @@ fun EditProfileScreen(
                     modifier = Modifier
                         .fillMaxWidth(),
                     text = viewModel.githubTextFieldState.value.text,
-                    hint = stringResource(id = androidx.compose.foundation.layout.R.string.github_profile_url),
+                    hint = stringResource(id = R.string.github_profile_url),
                     error = viewModel.githubTextFieldState.value.error,
-                    leadingIcon = ImageVector.vectorResource(id = androidx.compose.foundation.layout.R.drawable.ic_github_icon_1),
+                    leadingIcon = ImageVector.vectorResource(id = R.drawable.ic_github_icon_1),
                     onValueChange = {
                         viewModel.setGithubTextFieldState(
                             StandardTextFieldState(text = it)
@@ -115,9 +119,9 @@ fun EditProfileScreen(
                     modifier = Modifier
                         .fillMaxWidth(),
                     text = viewModel.instagramTextFieldState.value.text,
-                    hint = stringResource(id = androidx.compose.foundation.layout.R.string.instagram_profile_url),
+                    hint = stringResource(id = R.string.instagram_profile_url),
                     error = viewModel.instagramTextFieldState.value.error,
-                    leadingIcon = ImageVector.vectorResource(id = androidx.compose.foundation.layout.R.drawable.ic_instagram_glyph_1),
+                    leadingIcon = ImageVector.vectorResource(id = R.drawable.ic_instagram_glyph_1),
                     onValueChange = {
                         viewModel.setInstagramTextFieldState(
                             StandardTextFieldState(text = it)
@@ -129,9 +133,9 @@ fun EditProfileScreen(
                     modifier = Modifier
                         .fillMaxWidth(),
                     text = viewModel.linkedInTextFieldState.value.text,
-                    hint = stringResource(id = androidx.compose.foundation.layout.R.string.linked_in_profile_url),
+                    hint = stringResource(id = R.string.linked_in_profile_url),
                     error = viewModel.linkedInTextFieldState.value.error,
-                    leadingIcon = ImageVector.vectorResource(id = androidx.compose.foundation.layout.R.drawable.ic_linkedin_icon_1),
+                    leadingIcon = ImageVector.vectorResource(id = R.drawable.ic_linkedin_icon_1),
                     onValueChange = {
                         viewModel.setLinkedInTextFieldState(
                             StandardTextFieldState(text = it)
@@ -143,7 +147,7 @@ fun EditProfileScreen(
                     modifier = Modifier
                         .fillMaxWidth(),
                     text = viewModel.bioState.value.text,
-                    hint = stringResource(id = androidx.compose.foundation.layout.R.string.your_bio),
+                    hint = stringResource(id = R.string.your_bio),
                     error = viewModel.bioState.value.error,
                     singleLine = false,
                     maxLines = 3,
@@ -156,12 +160,38 @@ fun EditProfileScreen(
                 )
                 Spacer(modifier = Modifier.height(SpaceMedium))
                 Text(
-                    text = stringResource(id = androidx.compose.foundation.layout.R.string.select_top_3_skills),
+                    text = stringResource(id = R.string.select_top_3_skills),
                     style = MaterialTheme.typography.h2,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.align(Alignment.CenterHorizontally)
                 )
+                Spacer(modifier = Modifier.height(SpaceLarge))
+                FlowRow(
+                    modifier = Modifier.fillMaxWidth(),
+                    mainAxisAlignment = MainAxisAlignment.Center,
+                    mainAxisSpacing = SpaceMedium,
+                    crossAxisSpacing = SpaceMedium
+                ) {
+                    listOf(
+                        "Kotlin",
+                        "JavaScript",
+                        "Assembly",
+                        "C++",
+                        "C",
+                        "C#",
+                        "Dart",
+                        "TypeScript",
+                        "Python",
+                    ).forEach {
+                        Chip(
+                            text = it,
+                            selected = Random.nextInt(2) == 0
+                        ) {
 
+                        }
+                    }
+
+                }
             }
 
         }
