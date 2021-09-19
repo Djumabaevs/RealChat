@@ -20,6 +20,7 @@ import com.djumabaevs.realchat.presentation.ui.theme.SpaceLarge
 import com.djumabaevs.realchat.R
 import com.djumabaevs.realchat.presentation.components.StandardTextField
 import com.djumabaevs.realchat.presentation.ui.theme.SpaceMedium
+import com.djumabaevs.realchat.util.Constants
 
 
 @Composable
@@ -45,7 +46,7 @@ fun RegisterScreen(
                 .align(Alignment.Center),
         ) {
             Text(
-                text = stringResource(id = androidx.compose.foundation.layout.R.string.register),
+                text = stringResource(id = R.string.register),
                 style = MaterialTheme.typography.h1
             )
             Spacer(modifier = Modifier.height(SpaceMedium))
@@ -56,15 +57,15 @@ fun RegisterScreen(
                 },
                 error = when (state.emailError) {
                     RegisterState.EmailError.FieldEmpty -> {
-                        stringResource(id = androidx.compose.foundation.layout.R.string.this_field_cant_be_empty)
+                        stringResource(id = R.string.this_field_cant_be_empty)
                     }
                     RegisterState.EmailError.InvalidEmail -> {
-                        stringResource(id = androidx.compose.foundation.layout.R.string.not_a_valid_email)
+                        stringResource(id = R.string.not_a_valid_email)
                     }
                     null -> ""
                 },
                 keyboardType = KeyboardType.Email,
-                hint = stringResource(id = androidx.compose.foundation.layout.R.string.email)
+                hint = stringResource(id = R.string.email)
             )
             Spacer(modifier = Modifier.height(SpaceMedium))
             StandardTextField(
@@ -74,14 +75,14 @@ fun RegisterScreen(
                 },
                 error = when (state.usernameError) {
                     RegisterState.UsernameError.FieldEmpty -> {
-                        stringResource(id = androidx.compose.foundation.layout.R.string.this_field_cant_be_empty)
+                        stringResource(id = R.string.this_field_cant_be_empty)
                     }
                     RegisterState.UsernameError.InputTooShort -> {
-                        stringResource(id = androidx.compose.foundation.layout.R.string.input_too_short, Constants.MIN_USERNAME_LENGTH)
+                        stringResource(id = R.string.input_too_short, Constants.MIN_USERNAME_LENGTH)
                     }
                     null -> ""
                 },
-                hint = stringResource(id = androidx.compose.foundation.layout.R.string.username)
+                hint = stringResource(id = R.string.username)
             )
             Spacer(modifier = Modifier.height(SpaceMedium))
             StandardTextField(
@@ -89,17 +90,17 @@ fun RegisterScreen(
                 onValueChange = {
                     viewModel.onEvent(RegisterEvent.EnteredPassword(it))
                 },
-                hint = stringResource(id = androidx.compose.foundation.layout.R.string.password_hint),
+                hint = stringResource(id = R.string.password_hint),
                 keyboardType = KeyboardType.Password,
                 error = when (state.passwordError) {
                     RegisterState.PasswordError.FieldEmpty -> {
-                        stringResource(id = androidx.compose.foundation.layout.R.string.this_field_cant_be_empty)
+                        stringResource(id = R.string.this_field_cant_be_empty)
                     }
                     RegisterState.PasswordError.InputTooShort -> {
-                        stringResource(id = androidx.compose.foundation.layout.R.string.input_too_short, Constants.MIN_PASSWORD_LENGTH)
+                        stringResource(id = R.string.input_too_short, Constants.MIN_PASSWORD_LENGTH)
                     }
                     RegisterState.PasswordError.InvalidPassword -> {
-                        stringResource(id = androidx.compose.foundation.layout.R.string.invalid_password)
+                        stringResource(id = R.string.invalid_password)
                     }
                     null -> ""
                 },
@@ -117,16 +118,16 @@ fun RegisterScreen(
                     .align(Alignment.End)
             ) {
                 Text(
-                    text = stringResource(id = androidx.compose.foundation.layout.R.string.register),
+                    text = stringResource(id = R.string.register),
                     color = MaterialTheme.colors.onPrimary
                 )
             }
         }
         Text(
             text = buildAnnotatedString {
-                append(stringResource(id = androidx.compose.foundation.layout.R.string.already_have_an_account))
+                append(stringResource(id = R.string.already_have_an_account))
                 append(" ")
-                val signUpText = stringResource(id = androidx.compose.foundation.layout.R.string.sign_in)
+                val signUpText = stringResource(id = R.string.sign_in)
                 withStyle(
                     style = SpanStyle(
                         color = MaterialTheme.colors.primary
