@@ -27,6 +27,7 @@ fun RegisterScreen(
     navController: NavController,
     viewModel: RegisterViewModel = hiltViewModel()
 ) {
+    val state = viewModel.state.value
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -44,59 +45,88 @@ fun RegisterScreen(
                 .align(Alignment.Center),
         ) {
             Text(
-                text = stringResource(id = R.string.register),
+                text = stringResource(id = androidx.compose.foundation.layout.R.string.register),
                 style = MaterialTheme.typography.h1
             )
             Spacer(modifier = Modifier.height(SpaceMedium))
             StandardTextField(
-                text = viewModel.emailText.value,
+                text = state.emailText,
                 onValueChange = {
-                    viewModel.setEmailText(it)
+                    viewModel.onEvent(RegisterEvent.EnteredEmail(it))
                 },
-                error = viewModel.emailError.value,
+                error = when (state.emailError) {
+                    RegisterState.EmailError.FieldEmpty -> {
+                        stringResource(id = androidx.compose.foundation.layout.R.string.this_field_cant_be_empty)
+                    }
+                    RegisterState.EmailError.InvalidEmail -> {
+                        stringResource(id = androidx.compose.foundation.layout.R.string.not_a_valid_email)
+                    }
+                    null -> ""
+                },
                 keyboardType = KeyboardType.Email,
-                hint = stringResource(id = R.string.email)
+                hint = stringResource(id = androidx.compose.foundation.layout.R.string.email)
             )
             Spacer(modifier = Modifier.height(SpaceMedium))
             StandardTextField(
-                text = viewModel.usernameText.value,
+                text = state.usernameText,
                 onValueChange = {
-                    viewModel.setUsernameText(it)
+                    viewModel.onEvent(RegisterEvent.EnteredUsername(it))
                 },
-                error = viewModel.usernameError.value,
-                hint = stringResource(id = R.string.username)
+                error = when (state.usernameError) {
+                    RegisterState.UsernameError.FieldEmpty -> {
+                        stringResource(id = androidx.compose.foundation.layout.R.string.this_field_cant_be_empty)
+                    }
+                    RegisterState.UsernameError.InputTooShort -> {
+                        stringResource(id = androidx.compose.foundation.layout.R.string.input_too_short, Constants.MIN_USERNAME_LENGTH)
+                    }
+                    null -> ""
+                },
+                hint = stringResource(id = androidx.compose.foundation.layout.R.string.username)
             )
             Spacer(modifier = Modifier.height(SpaceMedium))
             StandardTextField(
-                text = viewModel.passwordText.value,
+                text = state.passwordText,
                 onValueChange = {
-                    viewModel.setPasswordText(it)
+                    viewModel.onEvent(RegisterEvent.EnteredPassword(it))
                 },
-                hint = stringResource(id = R.string.password_hint),
+                hint = stringResource(id = androidx.compose.foundation.layout.R.string.password_hint),
                 keyboardType = KeyboardType.Password,
-                error = viewModel.passwordError.value,
-                isPasswordVisible = viewModel.showPassword.value,
+                error = when (state.passwordError) {
+                    RegisterState.PasswordError.FieldEmpty -> {
+                        stringResource(id = androidx.compose.foundation.layout.R.string.this_field_cant_be_empty)
+                    }
+                    RegisterState.PasswordError.InputTooShort -> {
+                        stringResource(id = androidx.compose.foundation.layout.R.string.input_too_short, Constants.MIN_PASSWORD_LENGTH)
+                    }
+                    RegisterState.PasswordError.InvalidPassword -> {
+                        stringResource(id = androidx.compose.foundation.layout.R.string.invalid_password)
+                    }
+                    null -> ""
+                },
+                isPasswordVisible = state.isPasswordVisible,
                 onPasswordToggleClick = {
-                    viewModel.setShowPassword(it)
+                    viewModel.onEvent(RegisterEvent.TogglePasswordVisibility)
                 }
             )
             Spacer(modifier = Modifier.height(SpaceMedium))
             Button(
-                onClick = { },
+                onClick = {
+                    viewModel.onEvent(RegisterEvent.Register)
+                },
                 modifier = Modifier
                     .align(Alignment.End)
             ) {
                 Text(
-                    text = stringResource(id = R.string.register),
+                    text = stringResource(id = androidx.compose.foundation.layout.R.string.register),
                     color = MaterialTheme.colors.onPrimary
                 )
             }
         }
         Text(
             text = buildAnnotatedString {
-                append(stringResource(id = R.string.already_have_an_account))
+                append(stringResource(id = androidx.compose.foundation.layout.R.string.already_have_an_account))
                 append(" ")
-                val signUpText = stringResource(id = R.string.sign_in)
+                val signUpText = stringResource(id = androidx.compose.foundation.layout.R.string.sign_in)
                 withStyle(
                     style = SpanStyle(
                         color = MaterialTheme.colors.primary
