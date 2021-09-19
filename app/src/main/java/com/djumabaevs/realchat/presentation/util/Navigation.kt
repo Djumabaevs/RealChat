@@ -25,11 +25,9 @@ import com.djumabaevs.realchat.presentation.splash.SplashScreen
 @ExperimentalMaterialApi
 @Composable
 fun Navigation(navController: NavHostController) {
-//    val navController = rememberNavController()
-
     NavHost(
         navController = navController,
-        startDestination = Screen.SplashScreen.route,
+        startDestination = Screen.LoginScreen.route,
         modifier = Modifier.fillMaxSize()
     ) {
         composable(Screen.SplashScreen.route) {
@@ -66,7 +64,7 @@ fun Navigation(navController: NavHostController) {
             PostDetailScreen(
                 navController = navController,
                 post = Post(
-                    username = "Bakyt Djumabaev",
+                    username = "Philipp Lackner",
                     imageUrl = "",
                     profilePictureUrl = "",
                     description = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed\n" +
@@ -78,6 +76,9 @@ fun Navigation(navController: NavHostController) {
                     commentCount = 7
                 )
             )
+        }
+        composable(Screen.PersonListScreen.route) {
+            PersonListScreen(navController = navController)
         }
     }
 }
