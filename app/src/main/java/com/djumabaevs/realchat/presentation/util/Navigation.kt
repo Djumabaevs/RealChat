@@ -9,6 +9,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.djumabaevs.realchat.PersonListScreen
 import com.djumabaevs.realchat.domain.models.Post
 import com.djumabaevs.realchat.presentation.activity.ActivityScreen
 import com.djumabaevs.realchat.presentation.chat.ChatScreen

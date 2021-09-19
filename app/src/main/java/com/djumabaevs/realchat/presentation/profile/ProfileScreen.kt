@@ -117,7 +117,7 @@ fun ProfileScreen(
                         .height(SpaceMedium)
                 )
                 Post(
-                    post = Post(
+                    post = com.djumabaevs.realchat.domain.models.Post(
                         username = "Philipp Lackner",
                         imageUrl = "",
                         profilePictureUrl = "",
@@ -162,8 +162,8 @@ fun ProfileScreen(
                     }
             )
             Image(
-                painter = painterResource(id = androidx.compose.foundation.layout.R.drawable.philipp),
-                contentDescription = stringResource(id = androidx.compose.foundation.layout.R.string.profile_image),
+                painter = painterResource(id = R.drawable.philipp),
+                contentDescription = stringResource(id = R.string.profile_image),
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
                     .graphicsLayer {
