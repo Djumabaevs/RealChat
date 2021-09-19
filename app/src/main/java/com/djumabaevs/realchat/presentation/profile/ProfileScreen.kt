@@ -22,7 +22,9 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.djumabaevs.realchat.domain.models.User
 import com.djumabaevs.realchat.presentation.components.Post
@@ -35,52 +37,50 @@ import com.djumabaevs.realchat.presentation.util.Screen
 import com.djumabaevs.realchat.presentation.util.toPx
 
 @Composable
-fun ProfileScreen(navController: NavController) {
+fun ProfileScreen(
+    navController: NavController,
+    profilePictureSize: Dp = ProfilePictureSizeLarge,
+    viewModel: ProfileViewModel = hiltViewModel()
+) {
     val lazyListState = rememberLazyListState()
-    var toolbarOffsetY by remember {
-        mutableStateOf(0f)
-    }
+    val toolbarState = viewModel.toolbarState.value
+
     val iconHorizontalCenterLength =
         (LocalConfiguration.current.screenWidthDp.dp.toPx() / 4f -
-                (ProfilePictureSizeLarge / 4f).toPx() -
+                (profilePictureSize / 4f).toPx() -
                 SpaceSmall.toPx()) / 2f
     val iconSizeExpanded = 35.dp
     val toolbarHeightCollapsed = 75.dp
     val imageCollapsedOffsetY = remember {
-        (toolbarHeightCollapsed - ProfilePictureSizeLarge / 2f) / 2f
+        (toolbarHeightCollapsed - profilePictureSize / 2f) / 2f
     }
     val iconCollapsedOffsetY = remember {
         (toolbarHeightCollapsed - iconSizeExpanded) / 2f
     }
     val bannerHeight = (LocalConfiguration.current.screenWidthDp / 2.5f).dp
     val toolbarHeightExpanded = remember {
-        bannerHeight + ProfilePictureSizeLarge
+        bannerHeight + profilePictureSize
     }
     val maxOffset = remember {
         toolbarHeightExpanded - toolbarHeightCollapsed
     }
-    var expandedRatio by remember {
-        mutableStateOf(1f)
-    }
     val nestedScrollConnection = remember {
-        object: NestedScrollConnection {
+        object : NestedScrollConnection {
             override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
                 val delta = available.y
                 if(delta > 0f && lazyListState.firstVisibleItemIndex != 0) {
                     return Offset.Zero
                 }
-                val newOffset = toolbarOffsetY + delta
-                toolbarOffsetY = newOffset.coerceIn(
+                val newOffset = viewModel.toolbarState.value.toolbarOffsetY + delta
+                viewModel.setToolbarOffsetY(newOffset.coerceIn(
                     minimumValue = -maxOffset.toPx(),
                     maximumValue = 0f
-                )
-                expandedRatio = ((toolbarOffsetY + maxOffset.toPx()) / maxOffset.toPx())
-                println("EXPANDED RATIO: $expandedRatio")
+                ))
+                viewModel.setExpandedRatio((viewModel.toolbarState.value.toolbarOffsetY + maxOffset.toPx()) / maxOffset.toPx())
                 return Offset.Zero
             }
         }
     }
-
 
     Box(
         modifier = Modifier
@@ -94,14 +94,14 @@ fun ProfileScreen(navController: NavController) {
         ) {
             item {
                 Spacer(modifier = Modifier.height(
-                    toolbarHeightExpanded - ProfilePictureSizeLarge / 2f
+                    toolbarHeightExpanded - profilePictureSize / 2f
                 ))
             }
             item {
                 ProfileHeaderSection(
                     user = User(
                         profilePictureUrl = "",
-                        username = "Bakyt Djumabaev",
+                        username = "Philipp Lackner",
                         description = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed\n" +
                                 "diam nonumy eirmod tempor invidunt ut labore et dolore \n" +
                                 "magna aliquyam erat, sed diam voluptua",
@@ -117,8 +117,8 @@ fun ProfileScreen(navController: NavController) {
                         .height(SpaceMedium)
                 )
                 Post(
-                    post = com.djumabaevs.realchat.domain.models.Post(
-                        username = "Bakyt Djumabaev",
+                    post = Post(
+                        username = "Philipp Lackner",
                         imageUrl = "",
                         profilePictureUrl = "",
                         description = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed\n" +
@@ -141,43 +141,43 @@ fun ProfileScreen(navController: NavController) {
             BannerSection(
                 modifier = Modifier
                     .height(
-                        (bannerHeight * expandedRatio).coerceIn(
+                        (bannerHeight * toolbarState.expandedRatio).coerceIn(
                             minimumValue = toolbarHeightCollapsed,
                             maximumValue = bannerHeight
                         )
                     ),
                 leftIconModifier = Modifier
                     .graphicsLayer {
-                        translationY = (1f - expandedRatio) *
+                        translationY = (1f - toolbarState.expandedRatio) *
                                 -iconCollapsedOffsetY.toPx()
-                        translationX = (1f - expandedRatio) *
+                        translationX = (1f - toolbarState.expandedRatio) *
                                 iconHorizontalCenterLength
                     },
                 rightIconModifier = Modifier
                     .graphicsLayer {
-                        translationY = (1f - expandedRatio) *
+                        translationY = (1f - toolbarState.expandedRatio) *
                                 -iconCollapsedOffsetY.toPx()
-                        translationX = (1f - expandedRatio) *
+                        translationX = (1f - toolbarState.expandedRatio) *
                                 -iconHorizontalCenterLength
                     }
             )
             Image(
-                painter = painterResource(id = R.drawable.bakyt),
-                contentDescription = stringResource(id = R.string.profile_image),
+                painter = painterResource(id = androidx.compose.foundation.layout.R.drawable.philipp),
+                contentDescription = stringResource(id = androidx.compose.foundation.layout.R.string.profile_image),
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
                     .graphicsLayer {
-                        translationY = -ProfilePictureSizeLarge.toPx() / 2f -
-                                (1f - expandedRatio) * imageCollapsedOffsetY.toPx()
+                        translationY = -profilePictureSize.toPx() / 2f -
+                                (1f - toolbarState.expandedRatio) * imageCollapsedOffsetY.toPx()
                         transformOrigin = TransformOrigin(
                             pivotFractionX = 0.5f,
                             pivotFractionY = 0f
                         )
-                        val scale = 0.5f + expandedRatio * 0.5f
+                        val scale = 0.5f + toolbarState.expandedRatio * 0.5f
                         scaleX = scale
                         scaleY = scale
                     }
-                    .size(ProfilePictureSizeLarge)
+                    .size(profilePictureSize)
                     .clip(CircleShape)
                     .border(
                         width = 1.dp,
@@ -187,4 +187,6 @@ fun ProfileScreen(navController: NavController) {
             )
         }
     }
+
+
 }
