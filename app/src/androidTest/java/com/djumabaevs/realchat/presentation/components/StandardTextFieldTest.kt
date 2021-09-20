@@ -12,9 +12,6 @@ import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.djumabaevs.realchat.core.presentation.components.StandardTextField
-import com.djumabaevs.realchat.presentation.MainActivity
-import com.djumabaevs.realchat.presentation.util.TestTags.PASSWORD_TOGGLE
-import com.djumabaevs.realchat.presentation.util.TestTags.STANDARD_TEXT_FIELD
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
