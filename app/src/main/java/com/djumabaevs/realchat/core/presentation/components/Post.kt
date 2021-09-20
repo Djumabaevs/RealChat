@@ -34,7 +34,7 @@ import androidx.compose.ui.unit.sp
 import com.djumabaevs.realchat.R
 import com.djumabaevs.realchat.domain.models.Post
 import com.djumabaevs.realchat.presentation.ui.theme.*
-import com.djumabaevs.realchat.util.Constants
+import com.djumabaevs.realchat.core.util.Constants
 
 @Composable
 fun Post(

@@ -8,17 +8,16 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.djumabaevs.realchat.PersonListScreen
-import com.djumabaevs.realchat.domain.models.Post
 import com.djumabaevs.realchat.presentation.activity.ActivityScreen
 import com.djumabaevs.realchat.presentation.chat.ChatScreen
-import com.djumabaevs.realchat.presentation.create_post.CreatePostScreen
-import com.djumabaevs.realchat.presentation.edit_profile.EditProfileScreen
+import com.djumabaevs.realchat.feature_post.presentation.create_post.CreatePostScreen
+import com.djumabaevs.realchat.feature_profile.presentation.edit_profile.components.EditProfileScreen
 import com.djumabaevs.realchat.presentation.login.LoginScreen
 import com.djumabaevs.realchat.presentation.main_feed.MainFeedScreen
 import com.djumabaevs.realchat.presentation.post_detail.PostDetailScreen
-import com.djumabaevs.realchat.presentation.profile.ProfileScreen
-import com.djumabaevs.realchat.presentation.register.RegisterScreen
-import com.djumabaevs.realchat.presentation.search.SearchScreen
+import com.djumabaevs.realchat.feature_profile.presentation.profile.ProfileScreen
+import com.djumabaevs.realchat.feature_auth.presentation.register.RegisterScreen
+import com.djumabaevs.realchat.feature_profile.presentation.search.SearchScreen
 import com.djumabaevs.realchat.presentation.splash.SplashScreen
 import com.djumabaevs.realchat.presentation.util.Screen
 

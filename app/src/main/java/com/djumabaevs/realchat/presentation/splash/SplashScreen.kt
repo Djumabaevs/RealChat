@@ -16,7 +16,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
 import com.djumabaevs.realchat.R
 import com.djumabaevs.realchat.presentation.util.Screen
-import com.djumabaevs.realchat.util.Constants
+import com.djumabaevs.realchat.core.util.Constants
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
