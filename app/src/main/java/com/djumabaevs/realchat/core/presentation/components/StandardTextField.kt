@@ -1,4 +1,4 @@
-package com.djumabaevs.realchat.presentation.components
+package com.djumabaevs.realchat.core.presentation.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,7 +22,10 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import com.djumabaevs.realchat.R
 import com.djumabaevs.realchat.core.presentation.ui.theme.IconSizeMedium
-import com.djumabaevs.realchat.presentation.util.TestTags
+import com.djumabaevs.realchat.core.util.TestTags
+
+
+var i = 0
 
 @Composable
 fun StandardTextField(

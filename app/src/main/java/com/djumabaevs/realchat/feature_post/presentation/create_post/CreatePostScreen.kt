@@ -19,12 +19,13 @@ import androidx.compose.ui.unit.dp
 import com.djumabaevs.realchat.R
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.djumabaevs.realchat.presentation.components.StandardTextField
-import com.djumabaevs.realchat.presentation.components.StandardToolbar
+import com.djumabaevs.realchat.core.domain.states.StandardTextFieldState
+import com.djumabaevs.realchat.core.presentation.components.StandardTextField
+import com.djumabaevs.realchat.core.presentation.components.StandardToolbar
 import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceLarge
 import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceMedium
 import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceSmall
-import com.djumabaevs.realchat.presentation.util.states.StandardTextFieldState
+import com.djumabaevs.realchat.feature_post.presentation.util.PostDescriptionError
 
 @Composable
 fun CreatePostScreen(
@@ -76,7 +77,10 @@ fun CreatePostScreen(
                     .fillMaxWidth(),
                 text = viewModel.descriptionState.value.text,
                 hint = stringResource(id = R.string.description),
-                error = viewModel.descriptionState.value.error,
+                error = when (viewModel.descriptionState.value.error) {
+                    is PostDescriptionError.FieldEmpty -> stringResource(id = R.string.this_field_cant_be_empty)
+                    else -> ""
+                },
                 singleLine = false,
                 maxLines = 5,
                 onValueChange = {

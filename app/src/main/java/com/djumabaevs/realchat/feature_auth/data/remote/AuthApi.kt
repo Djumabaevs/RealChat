@@ -1,5 +1,7 @@
 package com.djumabaevs.realchat.feature_auth.data.remote
 
+import com.djumabaevs.realchat.core.data.dto.response.BasicApiResponse
+import com.djumabaevs.realchat.feature_auth.data.dto.request.CreateAccountRequest
 import retrofit2.http.Body
 import retrofit2.http.POST
 

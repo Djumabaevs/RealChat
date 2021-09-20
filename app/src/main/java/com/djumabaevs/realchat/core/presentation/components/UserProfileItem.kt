@@ -1,4 +1,4 @@
-package com.djumabaevs.realchat.presentation.components
+package com.djumabaevs.realchat.core.presentation.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -12,12 +12,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.djumabaevs.realchat.domain.models.User
 import com.djumabaevs.realchat.core.presentation.ui.theme.IconSizeMedium
 import com.djumabaevs.realchat.core.presentation.ui.theme.ProfilePictureSizeSmall
 import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceMedium
 import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceSmall
 import com.djumabaevs.realchat.R
+import com.djumabaevs.realchat.core.domain.models.User
 
 @ExperimentalMaterialApi
 @Composable

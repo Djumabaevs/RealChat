@@ -1,5 +1,7 @@
 package com.djumabaevs.realchat.feature_auth.domain.repository
 
+import com.djumabaevs.realchat.core.util.SimpleResource
+
 interface AuthRepository {
 
     suspend fun register(

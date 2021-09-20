@@ -1,4 +1,4 @@
-package com.djumabaevs.realchat.presentation.profile.components
+package com.djumabaevs.realchat.feature_profile.presentation.profile.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
@@ -14,9 +14,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.djumabaevs.realchat.domain.models.User
 import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceSmall
 import com.djumabaevs.realchat.R
+import com.djumabaevs.realchat.core.domain.models.User
 import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceLarge
 import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceMedium
 

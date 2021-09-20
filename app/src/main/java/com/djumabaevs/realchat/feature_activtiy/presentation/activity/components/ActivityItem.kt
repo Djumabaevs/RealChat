@@ -19,9 +19,9 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.djumabaevs.realchat.R
-import com.djumabaevs.realchat.domain.models.Activity
-import com.djumabaevs.realchat.domain.util.ActivityAction
+import com.djumabaevs.realchat.core.domain.models.Activity
 import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceSmall
+import com.djumabaevs.realchat.feature_activtiy.domain.ActivityAction
 
 
 @Composable

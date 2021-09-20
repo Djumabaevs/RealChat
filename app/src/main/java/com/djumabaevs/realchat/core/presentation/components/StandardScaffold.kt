@@ -1,4 +1,4 @@
-package com.djumabaevs.realchat.presentation.components
+package com.djumabaevs.realchat.core.presentation.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.CircleShape
@@ -14,15 +14,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.djumabaevs.realchat.domain.models.BottomNavItem
-import com.djumabaevs.realchat.presentation.util.Screen
 import com.djumabaevs.realchat.R
+import com.djumabaevs.realchat.core.domain.models.BottomNavItem
+import com.djumabaevs.realchat.core.util.Screen
 
 @Composable
-fun StandardScaffold (
+fun StandardScaffold(
     navController: NavController,
     modifier: Modifier = Modifier,
     showBottomBar: Boolean = true,
+    state: ScaffoldState,
     bottomNavItems: List<BottomNavItem> = listOf(
         BottomNavItem(
             route = Screen.MainFeedScreen.route,
@@ -49,7 +50,7 @@ fun StandardScaffold (
     onFabClick: () -> Unit = {},
     content: @Composable () -> Unit
 ) {
-    Scaffold (
+    Scaffold(
         bottomBar = {
             if (showBottomBar) {
                 BottomAppBar(
@@ -76,6 +77,7 @@ fun StandardScaffold (
                 }
             }
         },
+        scaffoldState = state,
         floatingActionButton = {
             if (showBottomBar) {
                 FloatingActionButton(
@@ -92,7 +94,7 @@ fun StandardScaffold (
         isFloatingActionButtonDocked = true,
         floatingActionButtonPosition = FabPosition.Center,
         modifier = modifier
-            ) {
-            content()
+    ) {
+        content()
     }
 }

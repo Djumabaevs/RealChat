@@ -1,4 +1,4 @@
-package com.djumabaevs.realchat.presentation.components
+package com.djumabaevs.realchat.core.presentation.components
 
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.Icon

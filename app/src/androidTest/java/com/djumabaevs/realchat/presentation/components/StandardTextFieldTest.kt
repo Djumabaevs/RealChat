@@ -8,13 +8,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTag
-import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
-import androidx.compose.ui.test.onNodeWithTag
-import androidx.compose.ui.test.performTextClearance
-import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.djumabaevs.realchat.core.presentation.components.StandardTextField
 import com.djumabaevs.realchat.presentation.MainActivity
 import com.djumabaevs.realchat.presentation.util.TestTags.PASSWORD_TOGGLE
 import com.djumabaevs.realchat.presentation.util.TestTags.STANDARD_TEXT_FIELD

@@ -10,15 +10,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.djumabaevs.realchat.presentation.components.StandardToolbar
+import com.djumabaevs.realchat.core.presentation.components.StandardToolbar
 import kotlin.random.Random
 import com.djumabaevs.realchat.R
-import com.djumabaevs.realchat.domain.models.Activity
-import com.djumabaevs.realchat.domain.util.ActivityAction
+import com.djumabaevs.realchat.core.domain.models.Activity
 import com.djumabaevs.realchat.core.util.DateFormatUtil
 import com.djumabaevs.realchat.feature_activtiy.presentation.activity.ActivityViewModel
 import com.djumabaevs.realchat.presentation.activity.components.ActivityItem
 import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceMedium
+import com.djumabaevs.realchat.feature_activtiy.domain.ActivityAction
 
 @Composable
 fun ActivityScreen(

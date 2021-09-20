@@ -13,6 +13,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavController
+import com.djumabaevs.realchat.core.domain.models.User
+import com.djumabaevs.realchat.core.presentation.ui.theme.IconSizeMedium
+import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceLarge
+import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceMedium
+import com.djumabaevs.realchat.core.presentation.components.StandardToolbar
+import com.djumabaevs.realchat.core.presentation.components.UserProfileItem
+import com.djumabaevs.realchat.R
 
 @ExperimentalMaterialApi
 @Composable

@@ -26,15 +26,15 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.djumabaevs.realchat.domain.models.User
-import com.djumabaevs.realchat.presentation.components.Post
+import com.djumabaevs.realchat.core.domain.models.User
+import com.djumabaevs.realchat.core.presentation.components.Post
 import com.djumabaevs.realchat.presentation.profile.components.BannerSection
-import com.djumabaevs.realchat.presentation.profile.components.ProfileHeaderSection
+import com.djumabaevs.realchat.feature_profile.presentation.profile.components.ProfileHeaderSection
 import com.djumabaevs.realchat.core.presentation.ui.theme.ProfilePictureSizeLarge
 import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceMedium
 import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceSmall
-import com.djumabaevs.realchat.presentation.util.Screen
-import com.djumabaevs.realchat.presentation.util.toPx
+import com.djumabaevs.realchat.core.util.Screen
+import com.djumabaevs.realchat.core.util.toPx
 
 @Composable
 fun ProfileScreen(
@@ -101,7 +101,7 @@ fun ProfileScreen(
                 ProfileHeaderSection(
                     user = User(
                         profilePictureUrl = "",
-                        username = "Philipp Lackner",
+                        username = "Bakyt Djumabaev",
                         description = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed\n" +
                                 "diam nonumy eirmod tempor invidunt ut labore et dolore \n" +
                                 "magna aliquyam erat, sed diam voluptua",
@@ -117,8 +117,8 @@ fun ProfileScreen(
                         .height(SpaceMedium)
                 )
                 Post(
-                    post = com.djumabaevs.realchat.domain.models.Post(
-                        username = "Philipp Lackner",
+                    post = com.djumabaevs.realchat.core.domain.models.Post(
+                        username = "Bakyt Djumabaev",
                         imageUrl = "",
                         profilePictureUrl = "",
                         description = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed\n" +

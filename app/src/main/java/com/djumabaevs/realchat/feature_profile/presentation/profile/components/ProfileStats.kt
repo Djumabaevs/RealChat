@@ -1,4 +1,4 @@
-package com.djumabaevs.realchat.presentation.profile.components
+package com.djumabaevs.realchat.feature_profile.presentation.profile.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -14,8 +14,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import com.djumabaevs.realchat.R
-import com.djumabaevs.realchat.domain.models.User
+import com.djumabaevs.realchat.core.domain.models.User
 import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceLarge
+import com.djumabaevs.realchat.presentation.profile.components.ProfileNumber
 
 @Composable
 fun ProfileStats(

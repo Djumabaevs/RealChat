@@ -4,102 +4,119 @@ import android.util.Patterns
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.djumabaevs.realchat.R
+import com.djumabaevs.realchat.core.domain.states.PasswordTextFieldState
+import com.djumabaevs.realchat.core.domain.states.StandardTextFieldState
 import com.djumabaevs.realchat.core.util.Constants
+import com.djumabaevs.realchat.core.util.Resource
+import com.djumabaevs.realchat.core.util.UiText
+import com.djumabaevs.realchat.feature_auth.domain.use_case.RegisterUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class RegisterViewModel @Inject constructor() : ViewModel() {
+class RegisterViewModel @Inject constructor(
+    private val registerUseCase: RegisterUseCase
+) : ViewModel() {
 
-    private val _state = mutableStateOf(RegisterState())
-    val state: State<RegisterState> = _state
+    private val _emailState = mutableStateOf(StandardTextFieldState())
+    val emailState: State<StandardTextFieldState> = _emailState
+
+    private val _usernameState = mutableStateOf(StandardTextFieldState())
+    val usernameState: State<StandardTextFieldState> = _usernameState
+
+    private val _passwordState = mutableStateOf(PasswordTextFieldState())
+    val passwordState: State<PasswordTextFieldState> = _passwordState
+
+    private val _registerState = mutableStateOf(RegisterState())
+    val registerState: State<RegisterState> = _registerState
+
+    private val _eventFlow = MutableSharedFlow<UiEvent>()
+    val eventFlow = _eventFlow.asSharedFlow()
 
     fun onEvent(event: RegisterEvent) {
         when(event) {
             is RegisterEvent.EnteredUsername -> {
-                _state.value = _state.value.copy(
-                    usernameText = event.value
+                _usernameState.value = _usernameState.value.copy(
+                    text = event.value
                 )
             }
             is RegisterEvent.EnteredEmail -> {
-                _state.value = _state.value.copy(
-                    emailText = event.value
+                _emailState.value = _emailState.value.copy(
+                    text = event.value
                 )
             }
             is RegisterEvent.EnteredPassword -> {
-                _state.value = _state.value.copy(
-                    passwordText = event.value
+                _passwordState.value = _passwordState.value.copy(
+                    text = event.value
                 )
             }
             is RegisterEvent.TogglePasswordVisibility -> {
-                _state.value = _state.value.copy(
-                    isPasswordVisible = !state.value.isPasswordVisible
+                _passwordState.value = _passwordState.value.copy(
+                    isPasswordVisible = !passwordState.value.isPasswordVisible
                 )
             }
             is RegisterEvent.Register -> {
-                validateUsername(state.value.usernameText)
-                validateEmail(state.value.emailText)
-                validatePassword(state.value.passwordText)
+                register()
             }
         }
     }
 
-    private fun validateUsername(username: String) {
-        val trimmedUsername = username.trim()
-        if(trimmedUsername.isBlank()) {
-            _state.value = _state.value.copy(
-                usernameError = RegisterState.UsernameError.FieldEmpty
+    private fun register() {
+        viewModelScope.launch {
+            _usernameState.value = usernameState.value.copy(error = null)
+            _emailState.value = emailState.value.copy(error = null)
+            _passwordState.value = passwordState.value.copy(error = null)
+            _registerState.value = RegisterState(isLoading = true)
+            val registerResult = registerUseCase(
+                email = emailState.value.text,
+                username = usernameState.value.text,
+                password = passwordState.value.text
             )
-            return
+            if(registerResult.emailError != null) {
+                _emailState.value = emailState.value.copy(
+                    error = registerResult.emailError
+                )
+            }
+            if(registerResult.usernameError != null) {
+                _usernameState.value = _usernameState.value.copy(
+                    error = registerResult.usernameError
+                )
+            }
+            if(registerResult.passwordError != null) {
+                _passwordState.value = _passwordState.value.copy(
+                    error = registerResult.passwordError
+                )
+            }
+            when(registerResult.result) {
+                is Resource.Success -> {
+                    _eventFlow.emit(
+                        UiEvent.SnackbarEvent(UiText.StringResource(R.string.success_registration))
+                    )
+                    _registerState.value = RegisterState(isLoading = false)
+                    _usernameState.value = StandardTextFieldState()
+                    _emailState.value = StandardTextFieldState()
+                    _passwordState.value = PasswordTextFieldState()
+                }
+                is Resource.Error -> {
+                    _eventFlow.emit(
+                        UiEvent.SnackbarEvent(registerResult.result.uiText ?: UiText.unknownError())
+                    )
+                    _registerState.value = RegisterState(isLoading = false)
+                }
+                null -> {
+                    _registerState.value = RegisterState(isLoading = false)
+                }
+            }
         }
-        if(trimmedUsername.length < Constants.MIN_USERNAME_LENGTH) {
-            _state.value = _state.value.copy(
-                usernameError = RegisterState.UsernameError.InputTooShort
-            )
-            return
-        }
-        _state.value = _state.value.copy(usernameError = null)
     }
 
-    private fun validateEmail(email: String) {
-        val trimmedEmail = email.trim()
-        if(trimmedEmail.isBlank()) {
-            _state.value = _state.value.copy(
-                emailError = RegisterState.EmailError.FieldEmpty
-            )
-            return
-        }
-        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            _state.value = _state.value.copy(
-                emailError = RegisterState.EmailError.InvalidEmail
-            )
-            return
-        }
-        _state.value = _state.value.copy(emailError = null)
-    }
-
-    private fun validatePassword(password: String) {
-        if(password.isBlank()) {
-            _state.value = _state.value.copy(
-                passwordError = RegisterState.PasswordError.FieldEmpty
-            )
-            return
-        }
-        if(password.length < Constants.MIN_PASSWORD_LENGTH) {
-            _state.value = _state.value.copy(
-                passwordError = RegisterState.PasswordError.InputTooShort
-            )
-            return
-        }
-        val capitalLettersInPassword = password.any { it.isUpperCase() }
-        val numberInPassword = password.any { it.isDigit() }
-        if(!capitalLettersInPassword || !numberInPassword) {
-            _state.value = _state.value.copy(
-                passwordError = RegisterState.PasswordError.InvalidPassword
-            )
-            return
-        }
-        _state.value = _state.value.copy(passwordError = null)
+    sealed class UiEvent {
+        data class SnackbarEvent(val uiText: UiText): UiEvent()
     }
 
 }

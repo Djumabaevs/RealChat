@@ -2,28 +2,34 @@ package com.djumabaevs.realchat.core.presentation.components
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.ScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.djumabaevs.realchat.PersonListScreen
+import com.djumabaevs.realchat.core.domain.models.Post
+import com.djumabaevs.realchat.core.util.Screen
 import com.djumabaevs.realchat.presentation.activity.ActivityScreen
 import com.djumabaevs.realchat.presentation.chat.ChatScreen
 import com.djumabaevs.realchat.feature_post.presentation.create_post.CreatePostScreen
 import com.djumabaevs.realchat.feature_profile.presentation.edit_profile.components.EditProfileScreen
 import com.djumabaevs.realchat.presentation.login.LoginScreen
 import com.djumabaevs.realchat.presentation.main_feed.MainFeedScreen
-import com.djumabaevs.realchat.presentation.post_detail.PostDetailScreen
+import com.djumabaevs.realchat.feature_post.presentation.post_detail.PostDetailScreen
 import com.djumabaevs.realchat.feature_profile.presentation.profile.ProfileScreen
 import com.djumabaevs.realchat.feature_auth.presentation.register.RegisterScreen
+import com.djumabaevs.realchat.feature_post.presentation.person_list.PersonListScreen
 import com.djumabaevs.realchat.feature_profile.presentation.search.SearchScreen
 import com.djumabaevs.realchat.presentation.splash.SplashScreen
-import com.djumabaevs.realchat.presentation.util.Screen
+
 
 @ExperimentalMaterialApi
 @Composable
-fun Navigation(navController: NavHostController) {
+fun Navigation(
+    navController: NavHostController,
+    scaffoldState: ScaffoldState
+) {
     NavHost(
         navController = navController,
         startDestination = Screen.LoginScreen.route,
@@ -36,7 +42,10 @@ fun Navigation(navController: NavHostController) {
             LoginScreen(navController = navController)
         }
         composable(Screen.RegisterScreen.route) {
-            RegisterScreen(navController = navController)
+            RegisterScreen(
+                navController = navController,
+                scaffoldState = scaffoldState
+            )
         }
         composable(Screen.MainFeedScreen.route) {
             MainFeedScreen(navController = navController)

@@ -2,12 +2,12 @@ package com.djumabaevs.realchat.feature_auth.presentation.register
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -18,17 +18,39 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceLarge
 import com.djumabaevs.realchat.R
-import com.djumabaevs.realchat.presentation.components.StandardTextField
+import com.djumabaevs.realchat.core.presentation.components.StandardTextField
 import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceMedium
+import com.djumabaevs.realchat.core.presentation.util.asString
 import com.djumabaevs.realchat.core.util.Constants
+import com.djumabaevs.realchat.feature_auth.presentation.util.AuthError
+import kotlinx.coroutines.flow.collectLatest
 
 
 @Composable
 fun RegisterScreen(
     navController: NavController,
+    scaffoldState: ScaffoldState,
     viewModel: RegisterViewModel = hiltViewModel()
 ) {
-    val state = viewModel.state.value
+    val usernameState = viewModel.usernameState.value
+    val emailState = viewModel.emailState.value
+    val passwordState = viewModel.passwordState.value
+    val registerState = viewModel.registerState.value
+    val context = LocalContext.current
+
+    LaunchedEffect(key1 = true) {
+        viewModel.eventFlow.collectLatest { event ->
+            when(event) {
+                is RegisterViewModel.UiEvent.SnackbarEvent -> {
+                    scaffoldState.snackbarHostState.showSnackbar(
+                        event.uiText.asString(context),
+                        duration = SnackbarDuration.Long
+                    )
+                }
+            }
+        }
+    }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -51,60 +73,60 @@ fun RegisterScreen(
             )
             Spacer(modifier = Modifier.height(SpaceMedium))
             StandardTextField(
-                text = state.emailText,
+                text = emailState.text,
                 onValueChange = {
                     viewModel.onEvent(RegisterEvent.EnteredEmail(it))
                 },
-                error = when (state.emailError) {
-                    RegisterState.EmailError.FieldEmpty -> {
+                error = when (emailState.error) {
+                    is AuthError.FieldEmpty -> {
                         stringResource(id = R.string.this_field_cant_be_empty)
                     }
-                    RegisterState.EmailError.InvalidEmail -> {
+                    is AuthError.InvalidEmail -> {
                         stringResource(id = R.string.not_a_valid_email)
                     }
-                    null -> ""
+                    else -> ""
                 },
                 keyboardType = KeyboardType.Email,
                 hint = stringResource(id = R.string.email)
             )
             Spacer(modifier = Modifier.height(SpaceMedium))
             StandardTextField(
-                text = state.usernameText,
+                text = usernameState.text,
                 onValueChange = {
                     viewModel.onEvent(RegisterEvent.EnteredUsername(it))
                 },
-                error = when (state.usernameError) {
-                    RegisterState.UsernameError.FieldEmpty -> {
+                error = when (viewModel.usernameState.value.error) {
+                    is AuthError.FieldEmpty -> {
                         stringResource(id = R.string.this_field_cant_be_empty)
                     }
-                    RegisterState.UsernameError.InputTooShort -> {
+                    is AuthError.InputTooShort -> {
                         stringResource(id = R.string.input_too_short, Constants.MIN_USERNAME_LENGTH)
                     }
-                    null -> ""
+                    else -> ""
                 },
                 hint = stringResource(id = R.string.username)
             )
             Spacer(modifier = Modifier.height(SpaceMedium))
             StandardTextField(
-                text = state.passwordText,
+                text = passwordState.text,
                 onValueChange = {
                     viewModel.onEvent(RegisterEvent.EnteredPassword(it))
                 },
                 hint = stringResource(id = R.string.password_hint),
                 keyboardType = KeyboardType.Password,
-                error = when (state.passwordError) {
-                    RegisterState.PasswordError.FieldEmpty -> {
+                error = when (passwordState.error) {
+                    is AuthError.FieldEmpty -> {
                         stringResource(id = R.string.this_field_cant_be_empty)
                     }
-                    RegisterState.PasswordError.InputTooShort -> {
+                    is AuthError.InputTooShort -> {
                         stringResource(id = R.string.input_too_short, Constants.MIN_PASSWORD_LENGTH)
                     }
-                    RegisterState.PasswordError.InvalidPassword -> {
+                    is AuthError.InvalidPassword -> {
                         stringResource(id = R.string.invalid_password)
                     }
-                    null -> ""
+                    else -> ""
                 },
-                isPasswordVisible = state.isPasswordVisible,
+                isPasswordVisible = passwordState.isPasswordVisible,
                 onPasswordToggleClick = {
                     viewModel.onEvent(RegisterEvent.TogglePasswordVisibility)
                 }
@@ -114,6 +136,7 @@ fun RegisterScreen(
                 onClick = {
                     viewModel.onEvent(RegisterEvent.Register)
                 },
+                enabled = !registerState.isLoading,
                 modifier = Modifier
                     .align(Alignment.End)
             ) {
@@ -121,6 +144,9 @@ fun RegisterScreen(
                     text = stringResource(id = R.string.register),
                     color = MaterialTheme.colors.onPrimary
                 )
+            }
+            if(registerState.isLoading) {
+                CircularProgressIndicator()
             }
         }
         Text(

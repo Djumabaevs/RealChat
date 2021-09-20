@@ -3,7 +3,7 @@ package com.djumabaevs.realchat.feature_profile.presentation.edit_profile.compon
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import com.djumabaevs.realchat.presentation.util.states.StandardTextFieldState
+import com.djumabaevs.realchat.core.domain.states.StandardTextFieldState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

@@ -2,6 +2,8 @@ package com.djumabaevs.realchat.core.presentation.util
 
 import android.content.Context
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
+import com.djumabaevs.realchat.core.util.UiText
 
 @Composable
 fun UiText.asString(): String {

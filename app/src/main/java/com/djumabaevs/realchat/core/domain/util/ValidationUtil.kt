@@ -1,6 +1,8 @@
 package com.djumabaevs.realchat.core.domain.util
 
 import android.util.Patterns
+import com.djumabaevs.realchat.core.util.Constants
+import com.djumabaevs.realchat.feature_auth.presentation.util.AuthError
 
 object ValidationUtil {
 

@@ -14,9 +14,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavController
 import com.djumabaevs.realchat.R
-import com.djumabaevs.realchat.presentation.components.Post
-import com.djumabaevs.realchat.presentation.components.StandardToolbar
-import com.djumabaevs.realchat.presentation.util.Screen
+import com.djumabaevs.realchat.core.util.Screen
+import com.djumabaevs.realchat.core.presentation.components.Post
+import com.djumabaevs.realchat.core.presentation.components.StandardToolbar
 
 @Composable
 fun MainFeedScreen (
@@ -49,7 +49,7 @@ fun MainFeedScreen (
             }
         )
         Post(
-            post = com.djumabaevs.realchat.domain.models.Post(
+            post = com.djumabaevs.realchat.core.domain.models.Post(
                 username = "Bakyt Djumabaev",
                 imageUrl = "",
                 profilePictureUrl = "",

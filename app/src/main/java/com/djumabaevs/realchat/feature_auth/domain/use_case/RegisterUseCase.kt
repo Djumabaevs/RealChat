@@ -1,5 +1,9 @@
 package com.djumabaevs.realchat.feature_auth.domain.use_case
 
+import com.djumabaevs.realchat.core.domain.util.ValidationUtil
+import com.djumabaevs.realchat.feature_auth.domain.models.RegisterResult
+import com.djumabaevs.realchat.feature_auth.domain.repository.AuthRepository
+
 class RegisterUseCase(
     private val repository: AuthRepository
 ) {

@@ -17,7 +17,8 @@ import androidx.compose.ui.unit.dp
 import com.djumabaevs.realchat.R
 import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceMedium
 import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceSmall
-import com.djumabaevs.realchat.presentation.util.toPx
+import com.djumabaevs.realchat.core.util.toPx
+
 
 @Composable
 fun BannerSection(

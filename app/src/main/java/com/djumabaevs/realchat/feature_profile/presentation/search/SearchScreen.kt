@@ -16,14 +16,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.djumabaevs.realchat.domain.models.User
-import com.djumabaevs.realchat.presentation.components.StandardTextField
-import com.djumabaevs.realchat.presentation.components.StandardToolbar
-import com.djumabaevs.realchat.presentation.components.UserProfileItem
+import com.djumabaevs.realchat.core.domain.models.User
+import com.djumabaevs.realchat.core.domain.states.StandardTextFieldState
+import com.djumabaevs.realchat.core.presentation.components.StandardTextField
+import com.djumabaevs.realchat.core.presentation.components.StandardToolbar
+import com.djumabaevs.realchat.core.presentation.components.UserProfileItem
 import com.djumabaevs.realchat.core.presentation.ui.theme.IconSizeMedium
 import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceLarge
 import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceMedium
-import com.djumabaevs.realchat.presentation.util.states.StandardTextFieldState
 
 @ExperimentalMaterialApi
 @Composable
@@ -55,7 +55,7 @@ fun SearchScreen(
                     .fillMaxWidth(),
                 text = viewModel.searchState.value.text,
                 hint = stringResource(id = R.string.search),
-                error = viewModel.searchState.value.error,
+                error = "",
                 leadingIcon = Icons.Default.Search,
                 onValueChange = {
                     viewModel.setSearchState(
@@ -63,7 +63,7 @@ fun SearchScreen(
                     )
                 }
             )
-            Spacer(modifier = androidx.compose.ui.Modifier.height(SpaceLarge))
+            Spacer(modifier = Modifier.height(SpaceLarge))
             LazyColumn(
                 modifier = Modifier.fillMaxSize()
             ) {
@@ -88,7 +88,7 @@ fun SearchScreen(
                             )
                         }
                     )
-                    Spacer(modifier = androidx.compose.ui.Modifier.height(SpaceMedium))
+                    Spacer(modifier = Modifier.height(SpaceMedium))
                 }
             }
         }

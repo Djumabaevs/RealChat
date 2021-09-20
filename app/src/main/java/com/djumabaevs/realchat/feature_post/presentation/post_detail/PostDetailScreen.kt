@@ -1,4 +1,4 @@
-package com.djumabaevs.realchat.presentation.post_detail
+package com.djumabaevs.realchat.feature_post.presentation.post_detail
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -18,11 +18,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.djumabaevs.realchat.domain.models.Post
 import com.djumabaevs.realchat.R
-import com.djumabaevs.realchat.domain.models.Comment
-import com.djumabaevs.realchat.presentation.components.ActionRow
-import com.djumabaevs.realchat.presentation.components.StandardToolbar
+import com.djumabaevs.realchat.core.domain.models.Comment
+import com.djumabaevs.realchat.core.domain.models.Post
+import com.djumabaevs.realchat.core.presentation.components.ActionRow
+import com.djumabaevs.realchat.core.presentation.components.StandardToolbar
 import com.djumabaevs.realchat.core.presentation.ui.theme.*
 
 @Composable
@@ -80,7 +80,7 @@ fun PostDetailScreen(
                                     .padding(SpaceLarge)
                             ) {
                                 ActionRow(
-                                    username = "Bakyt Djumabaev",
+                                    username = "Philipp Lackner",
                                     modifier = Modifier.fillMaxWidth(),
                                     onLikeClick = { isLiked ->
 
@@ -113,7 +113,7 @@ fun PostDetailScreen(
 
                         }
                         Image(
-                            painterResource(id = R.drawable.bakyt),
+                            painterResource(id = R.drawable.philipp),
                             contentDescription = "Profile picture",
                             modifier = Modifier
                                 .size(ProfilePictureSizeMedium)
@@ -174,11 +174,11 @@ fun Comment(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Image(
-                        painter = painterResource(id = R.drawable.bakyt),
+                        painter = painterResource(id = R.drawable.philipp),
                         contentDescription = null,
                         modifier = Modifier
                             .clip(CircleShape)
-                            .size(ProfilePictureSizeSmall)
+                            .size(ProfilePictureSizeExtraSmall)
                     )
                     Spacer(modifier = Modifier.width(SpaceSmall))
                     Text(
