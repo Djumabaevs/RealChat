@@ -5,7 +5,7 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.navigation.NavController
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.djumabaevs.realchat.presentation.MainActivity
-import com.djumabaevs.realchat.presentation.ui.theme.RealChatTheme
+import com.djumabaevs.realchat.core.presentation.ui.theme.RealChatTheme
 import com.djumabaevs.realchat.presentation.util.Screen
 import com.djumabaevs.realchat.core.util.Constants
 import io.mockk.MockKAnnotations

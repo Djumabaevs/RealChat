@@ -1,6 +1,5 @@
 package com.djumabaevs.realchat.presentation.profile.components
 
-import android.graphics.Paint
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -16,10 +15,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.djumabaevs.realchat.domain.models.User
-import com.djumabaevs.realchat.presentation.ui.theme.SpaceSmall
+import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceSmall
 import com.djumabaevs.realchat.R
-import com.djumabaevs.realchat.presentation.ui.theme.SpaceLarge
-import com.djumabaevs.realchat.presentation.ui.theme.SpaceMedium
+import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceLarge
+import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceMedium
 
 @Composable
 fun ProfileHeaderSection(

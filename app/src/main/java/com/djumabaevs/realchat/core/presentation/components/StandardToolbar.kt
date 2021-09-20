@@ -1,4 +1,4 @@
-package com.djumabaevs.realchat.core.presentation.components
+package com.djumabaevs.realchat.presentation.components
 
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.Icon
@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.djumabaevs.realchat.R
 
 @Composable
 fun StandardToolbar(

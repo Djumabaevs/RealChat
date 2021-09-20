@@ -18,7 +18,7 @@ import com.djumabaevs.realchat.domain.util.ActivityAction
 import com.djumabaevs.realchat.core.util.DateFormatUtil
 import com.djumabaevs.realchat.feature_activtiy.presentation.activity.ActivityViewModel
 import com.djumabaevs.realchat.presentation.activity.components.ActivityItem
-import com.djumabaevs.realchat.presentation.ui.theme.SpaceMedium
+import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceMedium
 
 @Composable
 fun ActivityScreen(

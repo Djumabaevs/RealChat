@@ -20,9 +20,9 @@ import com.djumabaevs.realchat.domain.models.User
 import com.djumabaevs.realchat.presentation.components.StandardTextField
 import com.djumabaevs.realchat.presentation.components.StandardToolbar
 import com.djumabaevs.realchat.presentation.components.UserProfileItem
-import com.djumabaevs.realchat.presentation.ui.theme.IconSizeMedium
-import com.djumabaevs.realchat.presentation.ui.theme.SpaceLarge
-import com.djumabaevs.realchat.presentation.ui.theme.SpaceMedium
+import com.djumabaevs.realchat.core.presentation.ui.theme.IconSizeMedium
+import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceLarge
+import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceMedium
 import com.djumabaevs.realchat.presentation.util.states.StandardTextFieldState
 
 @ExperimentalMaterialApi

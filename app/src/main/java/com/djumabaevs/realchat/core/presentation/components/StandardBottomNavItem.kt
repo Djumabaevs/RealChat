@@ -1,4 +1,4 @@
-package com.djumabaevs.realchat.core.presentation.components
+package com.djumabaevs.realchat.presentation.components
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
@@ -21,12 +22,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.djumabaevs.realchat.core.presentation.ui.theme.HintGray
+import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceSmall
 
 @Composable
 @Throws(IllegalArgumentException::class)
 fun RowScope.StandardBottomNavItem(
-    modifier: Modifier = Modifier,
     icon: ImageVector? = null,
+    modifier: Modifier = Modifier,
     contentDescription: String? = null,
     selected: Boolean = false,
     alertCount: Int? = null,
@@ -35,6 +38,7 @@ fun RowScope.StandardBottomNavItem(
     enabled: Boolean = true,
     onClick: () -> Unit
 ) {
+
     if (alertCount != null && alertCount < 0) {
         throw IllegalArgumentException("Alert count can't be negative")
     }
@@ -74,8 +78,6 @@ fun RowScope.StandardBottomNavItem(
                                 cap = StrokeCap.Round
                             )
                         }
-
-
                     }
             ) {
                 if(icon != null) {
@@ -109,4 +111,5 @@ fun RowScope.StandardBottomNavItem(
             }
         }
     )
+
 }

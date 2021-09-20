@@ -30,9 +30,9 @@ import com.djumabaevs.realchat.domain.models.User
 import com.djumabaevs.realchat.presentation.components.Post
 import com.djumabaevs.realchat.presentation.profile.components.BannerSection
 import com.djumabaevs.realchat.presentation.profile.components.ProfileHeaderSection
-import com.djumabaevs.realchat.presentation.ui.theme.ProfilePictureSizeLarge
-import com.djumabaevs.realchat.presentation.ui.theme.SpaceMedium
-import com.djumabaevs.realchat.presentation.ui.theme.SpaceSmall
+import com.djumabaevs.realchat.core.presentation.ui.theme.ProfilePictureSizeLarge
+import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceMedium
+import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceSmall
 import com.djumabaevs.realchat.presentation.util.Screen
 import com.djumabaevs.realchat.presentation.util.toPx
 

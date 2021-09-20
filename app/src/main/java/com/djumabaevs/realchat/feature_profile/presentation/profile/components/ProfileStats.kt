@@ -15,7 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import com.djumabaevs.realchat.R
 import com.djumabaevs.realchat.domain.models.User
-import com.djumabaevs.realchat.presentation.ui.theme.SpaceLarge
+import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceLarge
 
 @Composable
 fun ProfileStats(

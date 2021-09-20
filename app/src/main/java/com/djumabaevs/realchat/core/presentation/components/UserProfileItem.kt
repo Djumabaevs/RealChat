@@ -1,12 +1,9 @@
-package com.djumabaevs.realchat.core.presentation.components
+package com.djumabaevs.realchat.presentation.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Card
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -15,6 +12,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.djumabaevs.realchat.domain.models.User
+import com.djumabaevs.realchat.core.presentation.ui.theme.IconSizeMedium
+import com.djumabaevs.realchat.core.presentation.ui.theme.ProfilePictureSizeSmall
+import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceMedium
+import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceSmall
+import com.djumabaevs.realchat.R
 
 @ExperimentalMaterialApi
 @Composable
@@ -42,7 +45,7 @@ fun UserProfileItem(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Image(
-                painter = painterResource(id = R.drawable.philipp),
+                painter = painterResource(id = R.drawable.bakyt),
                 contentDescription = null,
                 modifier = Modifier
                     .size(ProfilePictureSizeSmall)

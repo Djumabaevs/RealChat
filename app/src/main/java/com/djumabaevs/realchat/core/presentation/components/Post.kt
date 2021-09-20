@@ -1,4 +1,4 @@
-package com.djumabaevs.realchat.core.presentation.components
+package com.djumabaevs.realchat.presentation.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -31,9 +31,9 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.djumabaevs.realchat.R
 import com.djumabaevs.realchat.domain.models.Post
-import com.djumabaevs.realchat.presentation.ui.theme.*
+import com.djumabaevs.realchat.R
+import com.djumabaevs.realchat.core.presentation.ui.theme.*
 import com.djumabaevs.realchat.core.util.Constants
 
 @Composable

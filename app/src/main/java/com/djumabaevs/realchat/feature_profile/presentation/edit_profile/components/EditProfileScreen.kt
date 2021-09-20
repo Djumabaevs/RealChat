@@ -34,9 +34,9 @@ import androidx.navigation.NavController
 import com.djumabaevs.realchat.presentation.components.StandardTextField
 import com.djumabaevs.realchat.presentation.components.StandardToolbar
 import com.djumabaevs.realchat.presentation.edit_profile.components.Chip
-import com.djumabaevs.realchat.presentation.ui.theme.ProfilePictureSizeLarge
-import com.djumabaevs.realchat.presentation.ui.theme.SpaceLarge
-import com.djumabaevs.realchat.presentation.ui.theme.SpaceMedium
+import com.djumabaevs.realchat.core.presentation.ui.theme.ProfilePictureSizeLarge
+import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceLarge
+import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceMedium
 import com.djumabaevs.realchat.presentation.util.states.StandardTextFieldState
 import com.google.accompanist.flowlayout.FlowRow
 import com.google.accompanist.flowlayout.MainAxisAlignment
