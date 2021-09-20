@@ -29,6 +29,7 @@ class RegisterViewModel @Inject constructor() : ViewModel() {
             is RegisterEvent.EnteredPassword -> {
                 _state.value = _state.value.copy(
                     passwordText = event.value
+
                 )
             }
             is RegisterEvent.TogglePasswordVisibility -> {
