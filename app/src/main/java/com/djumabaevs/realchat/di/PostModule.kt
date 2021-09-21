@@ -1,5 +1,6 @@
 package com.djumabaevs.realchat.di
 
+import com.djumabaevs.realchat.feature_post.data.data_source.remote.PostApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
