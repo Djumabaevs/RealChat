@@ -1,6 +1,10 @@
 package com.djumabaevs.realchat.di
 
 import com.djumabaevs.realchat.feature_post.data.data_source.remote.PostApi
+import com.djumabaevs.realchat.feature_post.data.repository.PostRepositoryImpl
+import com.djumabaevs.realchat.feature_post.domain.repository.PostRepository
+import com.djumabaevs.realchat.feature_post.domain.use_case.GetPostsForFollowsUseCase
+import com.djumabaevs.realchat.feature_post.domain.use_case.PostUseCases
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

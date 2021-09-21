@@ -1,5 +1,7 @@
 package com.djumabaevs.realchat.feature_post.data.paging
 
+import androidx.paging.PagingSource
+import androidx.paging.PagingState
 import com.djumabaevs.realchat.core.domain.models.Post
 import com.djumabaevs.realchat.core.util.Constants
 import com.djumabaevs.realchat.feature_post.data.data_source.remote.PostApi

@@ -1,33 +1,45 @@
 package com.djumabaevs.realchat.presentation.main_feed
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import androidx.paging.LoadState
 import com.djumabaevs.realchat.R
 import com.djumabaevs.realchat.core.util.Screen
 import com.djumabaevs.realchat.core.presentation.components.Post
 import com.djumabaevs.realchat.core.presentation.components.StandardToolbar
+import kotlinx.coroutines.launch
 
 @Composable
-fun MainFeedScreen (
-    navController: NavController
+fun MainFeedScreen(
+    navController: NavController,
+    scaffoldState: ScaffoldState,
+    viewModel: MainFeedViewModel = hiltViewModel()
 ) {
-    Column(modifier = Modifier.fillMaxWidth()) {
+    val posts = viewModel.posts.collectAsLazyPagingItems()
+    val state = viewModel.state.value
+    val scope = rememberCoroutineScope()
+    Column(
+        modifier = Modifier.fillMaxWidth()
+    ) {
         StandardToolbar(
             navController = navController,
             title = {
                 Text(
-                    text = stringResource(id = R.string.your_feed),
+                    text = stringResource(id = androidx.compose.material.R.string.your_feed),
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colors.onBackground
                 )
@@ -41,27 +53,59 @@ fun MainFeedScreen (
                     Icon(
                         imageVector = Icons.Default.Search,
                         contentDescription = "",
-                        tint =MaterialTheme.colors.onBackground
-
+                        tint = MaterialTheme.colors.onBackground
                     )
-
                 }
             }
         )
-        Post(
-            post = com.djumabaevs.realchat.core.domain.models.Post(
-                username = "Bakyt Djumabaev",
-                imageUrl = "",
-                profilePictureUrl = "",
-                description = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed\n" +
-                        "diam nonumy eirmod tempor invidunt ut labore et dolore \n" +
-                        "magna aliquyam erat, sed diam voluptua...",
-                likeCount = 10,
-                commentCount = 5
-            ),
-            onPostClick = {
-                navController.navigate(Screen.PostDetailScreen.route)
+        Box(modifier = Modifier.fillMaxSize()) {
+            if(state.isLoadingFirstTime) {
+                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
             }
-        )
+            LazyColumn {
+                items(posts) { post ->
+                    Post(
+                        post = com.plcoding.socialnetworktwitch.core.domain.models.Post(
+                            username = post?.username ?: "",
+                            imageUrl = post?.imageUrl ?: "",
+                            profilePictureUrl = post?.profilePictureUrl ?: "",
+                            description = post?.description ?: "",
+                            likeCount = post?.likeCount ?: 0,
+                            commentCount = post?.commentCount ?: 0
+                        ),
+                        onPostClick = {
+                            navController.navigate(Screen.PostDetailScreen.route)
+                        }
+                    )
+                }
+                item {
+                    if(state.isLoadingNewPosts) {
+                        CircularProgressIndicator(
+                            modifier = Modifier.align(Alignment.BottomCenter)
+                        )
+                    }
+                }
+                posts.apply {
+                    when {
+                        loadState.refresh !is LoadState.Loading -> {
+                            viewModel.onEvent(MainFeedEvent.LoadedPage)
+                        }
+                        loadState.append is LoadState.Loading -> {
+                            viewModel.onEvent(MainFeedEvent.LoadMorePosts)
+                        }
+                        loadState.append is LoadState.NotLoading -> {
+                            viewModel.onEvent(MainFeedEvent.LoadedPage)
+                        }
+                        loadState.append is LoadState.Error -> {
+                            scope.launch {
+                                scaffoldState.snackbarHostState.showSnackbar(
+                                    message = "Error"
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
