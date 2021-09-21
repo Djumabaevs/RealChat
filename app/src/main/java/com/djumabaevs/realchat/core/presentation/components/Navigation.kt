@@ -50,6 +50,7 @@ fun Navigation(
         composable(Screen.MainFeedScreen.route) {
             MainFeedScreen(navController = navController)
         }
+
         composable(Screen.ChatScreen.route) {
             ChatScreen(navController = navController)
         }
