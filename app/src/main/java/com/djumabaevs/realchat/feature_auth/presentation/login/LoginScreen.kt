@@ -21,7 +21,12 @@ import com.djumabaevs.realchat.R
 import com.djumabaevs.realchat.feature_auth.presentation.login.LoginViewModel
 import com.djumabaevs.realchat.core.presentation.components.StandardTextField
 import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceMedium
+import com.djumabaevs.realchat.core.presentation.util.asString
 import com.djumabaevs.realchat.core.util.Screen
+import com.djumabaevs.realchat.feature_auth.presentation.login.LoginEvent
+import com.djumabaevs.realchat.feature_auth.presentation.register.RegisterViewModel
+import com.djumabaevs.realchat.feature_auth.presentation.util.AuthError
+import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun LoginScreen(
@@ -37,12 +42,12 @@ fun LoginScreen(
     LaunchedEffect(key1 = true) {
         viewModel.eventFlow.collectLatest { event ->
             when (event) {
-                is UiEvent.SnackbarEvent -> {
+                is RegisterViewModel.UiEvent.SnackbarEvent -> {
                     scaffoldState.snackbarHostState.showSnackbar(
                         message = event.uiText.asString(context)
                     )
                 }
-                is UiEvent.Navigate -> {
+                is RegisterViewModel.UiEvent.Navigate -> {
                     navController.navigate(event.route)
                 }
             }

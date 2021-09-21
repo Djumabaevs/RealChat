@@ -115,8 +115,4 @@ class RegisterViewModel @Inject constructor(
         }
     }
 
-    sealed class UiEvent {
-        data class SnackbarEvent(val uiText: UiText): UiEvent()
-    }
-
 }
