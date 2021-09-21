@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.djumabaevs.realchat.core.domain.states.StandardTextFieldState
+import com.djumabaevs.realchat.core.presentation.util.UiEvent
 import com.djumabaevs.realchat.core.util.Resource
 import com.djumabaevs.realchat.core.util.Screen
 import com.djumabaevs.realchat.core.util.UiText
@@ -30,7 +31,7 @@ class LoginViewModel @Inject constructor(
     private val _loginState = mutableStateOf(LoginState())
     val loginState: State<LoginState> = _loginState
 
-    private val _eventFlow = MutableSharedFlow<RegisterViewModel.UiEvent>()
+    private val _eventFlow = MutableSharedFlow<UiEvent>()
     val eventFlow = _eventFlow.asSharedFlow()
 
     fun onEvent(event: LoginEvent) {
@@ -71,12 +72,12 @@ class LoginViewModel @Inject constructor(
                     when(loginResult.result) {
                         is Resource.Success -> {
                             _eventFlow.emit(
-                                RegisterViewModel.UiEvent.Navigate(Screen.MainFeedScreen.route)
+                                UiEvent.Navigate(Screen.MainFeedScreen.route)
                             )
                         }
                         is Resource.Error -> {
                             _eventFlow.emit(
-                                RegisterViewModel.UiEvent.SnackbarEvent(
+                                UiEvent.SnackbarEvent(
                                     loginResult.result.uiText ?: UiText.unknownError()
                                 )
                             )

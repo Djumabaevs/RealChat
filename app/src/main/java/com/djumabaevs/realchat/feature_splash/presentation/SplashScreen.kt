@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.res.painterResource
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.djumabaevs.realchat.R
 import com.djumabaevs.realchat.core.util.Constants
@@ -25,7 +26,8 @@ import kotlinx.coroutines.withContext
 @Composable
 fun SplashScreen(
     navController: NavController,
-    dispatcher: CoroutineDispatcher = Dispatchers.Main
+    dispatcher: CoroutineDispatcher = Dispatchers.Main,
+    viewModel: SplashViewModel = hiltViewModel()
 ) {
     val scale = remember {
         Animatable(0f)
@@ -44,9 +46,17 @@ fun SplashScreen(
                     }
                 )
             )
-            delay(Constants.SPLASH_SCREEN_DURATION)
-            navController.popBackStack()
-            navController.navigate(Screen.LoginScreen.route)
+        }
+    }
+    LaunchedEffect(key1 = true) {
+        viewModel.eventFlow.collectLatest { event ->
+            when(event) {
+                is UiEvent.Navigate -> {
+                    navController.popBackStack()
+                    navController.navigate(event.route)
+                }
+                else -> Unit
+            }
         }
     }
     Box(
@@ -54,7 +64,7 @@ fun SplashScreen(
         contentAlignment = Alignment.Center
     ) {
         Image(
-            painter = painterResource(id = R.drawable.ic_logo),
+            painter = painterResource(id = androidx.compose.runtime.R.drawable.ic_logo),
             contentDescription = "Logo",
             modifier = Modifier.scale(scale.value)
         )

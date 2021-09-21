@@ -4,6 +4,8 @@ import android.content.SharedPreferences
 import com.djumabaevs.realchat.feature_auth.data.remote.AuthApi
 import com.djumabaevs.realchat.feature_auth.data.repository.AuthRepositoryImpl
 import com.djumabaevs.realchat.feature_auth.domain.repository.AuthRepository
+import com.djumabaevs.realchat.feature_auth.domain.use_case.AuthenticateUseCase
+import com.djumabaevs.realchat.feature_auth.domain.use_case.LoginUseCase
 import com.djumabaevs.realchat.feature_auth.domain.use_case.RegisterUseCase
 import dagger.Module
 import dagger.Provides

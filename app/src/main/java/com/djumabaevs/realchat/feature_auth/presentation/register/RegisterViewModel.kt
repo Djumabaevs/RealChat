@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.djumabaevs.realchat.R
 import com.djumabaevs.realchat.core.domain.states.PasswordTextFieldState
 import com.djumabaevs.realchat.core.domain.states.StandardTextFieldState
+import com.djumabaevs.realchat.core.presentation.util.UiEvent
 import com.djumabaevs.realchat.core.util.Constants
 import com.djumabaevs.realchat.core.util.Resource
 import com.djumabaevs.realchat.core.util.UiText

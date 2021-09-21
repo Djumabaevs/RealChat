@@ -21,6 +21,7 @@ import com.djumabaevs.realchat.R
 import com.djumabaevs.realchat.feature_auth.presentation.login.LoginViewModel
 import com.djumabaevs.realchat.core.presentation.components.StandardTextField
 import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceMedium
+import com.djumabaevs.realchat.core.presentation.util.UiEvent
 import com.djumabaevs.realchat.core.presentation.util.asString
 import com.djumabaevs.realchat.core.util.Screen
 import com.djumabaevs.realchat.feature_auth.presentation.login.LoginEvent
@@ -42,12 +43,12 @@ fun LoginScreen(
     LaunchedEffect(key1 = true) {
         viewModel.eventFlow.collectLatest { event ->
             when (event) {
-                is RegisterViewModel.UiEvent.SnackbarEvent -> {
+                is UiEvent.SnackbarEvent -> {
                     scaffoldState.snackbarHostState.showSnackbar(
                         message = event.uiText.asString(context)
                     )
                 }
-                is RegisterViewModel.UiEvent.Navigate -> {
+                is UiEvent.Navigate -> {
                     navController.navigate(event.route)
                 }
             }
