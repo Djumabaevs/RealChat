@@ -16,11 +16,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.djumabaevs.realchat.R
+import com.djumabaevs.realchat.core.presentation.util.UiEvent
 import com.djumabaevs.realchat.core.util.Constants
 import com.djumabaevs.realchat.core.util.Screen
+import com.djumabaevs.realchat.feature_splash.presentation.SplashViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.withContext
 
 @Composable
@@ -64,7 +67,7 @@ fun SplashScreen(
         contentAlignment = Alignment.Center
     ) {
         Image(
-            painter = painterResource(id = androidx.compose.runtime.R.drawable.ic_logo),
+            painter = painterResource(id = R.drawable.ic_logo),
             contentDescription = "Logo",
             modifier = Modifier.scale(scale.value)
         )
