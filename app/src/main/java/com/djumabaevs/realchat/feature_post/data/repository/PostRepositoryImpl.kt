@@ -5,9 +5,14 @@ import androidx.core.net.toFile
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import com.djumabaevs.realchat.R
 import com.djumabaevs.realchat.core.domain.models.Post
 import com.djumabaevs.realchat.core.util.Constants
+import com.djumabaevs.realchat.core.util.Resource
+import com.djumabaevs.realchat.core.util.SimpleResource
+import com.djumabaevs.realchat.core.util.UiText
 import com.djumabaevs.realchat.feature_post.data.data_source.remote.PostApi
+import com.djumabaevs.realchat.feature_post.data.data_source.remote.request.CreatePostRequest
 import com.djumabaevs.realchat.feature_post.data.paging.PostSource
 import com.djumabaevs.realchat.feature_post.domain.repository.PostRepository
 import com.google.gson.Gson
