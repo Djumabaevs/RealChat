@@ -1,8 +1,9 @@
 package com.djumabaevs.realchat.feature_post.data.data_source.remote
 
+import com.djumabaevs.realchat.core.data.dto.response.BasicApiResponse
 import com.djumabaevs.realchat.core.domain.models.Post
-import retrofit2.http.GET
-import retrofit2.http.Query
+import okhttp3.MultipartBody
+import retrofit2.http.*
 
 
 interface PostApi {
@@ -12,6 +13,13 @@ interface PostApi {
         @Query("page") page: Int,
         @Query("pageSize") pageSize: Int
     ): List<Post>
+
+    @Multipart
+    @POST("/api/post/create")
+    suspend fun createPost(
+        @Part postData: MultipartBody.Part,
+        @Part postImage: MultipartBody.Part
+    ): BasicApiResponse<Unit>
 
     companion object {
         const val BASE_URL = "http://10.0.2.2:8001/"
