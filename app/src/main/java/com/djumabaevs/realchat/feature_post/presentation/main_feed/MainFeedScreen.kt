@@ -17,10 +17,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.paging.LoadState
+import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.paging.compose.items
 import com.djumabaevs.realchat.R
 import com.djumabaevs.realchat.core.util.Screen
 import com.djumabaevs.realchat.core.presentation.components.Post
 import com.djumabaevs.realchat.core.presentation.components.StandardToolbar
+import com.djumabaevs.realchat.feature_post.presentation.main_feed.MainFeedEvent
+import com.djumabaevs.realchat.feature_post.presentation.main_feed.MainFeedViewModel
 import kotlinx.coroutines.launch
 
 @Composable
@@ -39,7 +43,7 @@ fun MainFeedScreen(
             navController = navController,
             title = {
                 Text(
-                    text = stringResource(id = androidx.compose.material.R.string.your_feed),
+                    text = stringResource(id = R.string.your_feed),
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colors.onBackground
                 )
@@ -65,7 +69,7 @@ fun MainFeedScreen(
             LazyColumn {
                 items(posts) { post ->
                     Post(
-                        post = com.plcoding.socialnetworktwitch.core.domain.models.Post(
+                        post = com.djumabaevs.realchat.core.domain.models.Post(
                             username = post?.username ?: "",
                             imageUrl = post?.imageUrl ?: "",
                             profilePictureUrl = post?.profilePictureUrl ?: "",

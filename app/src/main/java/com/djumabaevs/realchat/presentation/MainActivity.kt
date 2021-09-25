@@ -1,4 +1,4 @@
-package com.djumabaevs.realchat.core.presentation
+package com.djumabaevs.realchat.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
