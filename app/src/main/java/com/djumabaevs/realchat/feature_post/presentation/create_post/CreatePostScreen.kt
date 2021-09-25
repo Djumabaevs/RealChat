@@ -68,7 +68,7 @@ fun CreatePostScreen(
                         shape = MaterialTheme.shapes.medium
                     )
                     .clickable {
-
+                        galleryLauncher.launch("image/*")
                     },
                 contentAlignment = Alignment.Center
             ) {
@@ -91,14 +91,16 @@ fun CreatePostScreen(
                 singleLine = false,
                 maxLines = 5,
                 onValueChange = {
-                    viewModel.setDescriptionState(
-                        StandardTextFieldState(text = it)
+                    viewModel.onEvent(
+                        CreatePostEvent.EnterDescription(it)
                     )
                 }
             )
             Spacer(modifier = Modifier.height(SpaceLarge))
             Button(
-                onClick = { /*TODO*/ },
+                onClick = {
+                    viewModel.onEvent(CreatePostEvent.PostImage)
+                          },
                 modifier = Modifier.align(Alignment.End)
             ) {
                 Text(
