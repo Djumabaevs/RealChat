@@ -113,7 +113,7 @@ fun PostDetailScreen(
 
                         }
                         Image(
-                            painterResource(id = R.drawable.philipp),
+                            painterResource(id = R.drawable.bakyt),
                             contentDescription = "Profile picture",
                             modifier = Modifier
                                 .size(ProfilePictureSizeMedium)
@@ -174,7 +174,7 @@ fun Comment(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Image(
-                        painter = painterResource(id = R.drawable.philipp),
+                        painter = painterResource(id = R.drawable.bakyt),
                         contentDescription = null,
                         modifier = Modifier
                             .clip(CircleShape)

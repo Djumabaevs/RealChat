@@ -162,7 +162,7 @@ fun ProfileScreen(
                     }
             )
             Image(
-                painter = painterResource(id = R.drawable.philipp),
+                painter = painterResource(id = R.drawable.bakyt),
                 contentDescription = stringResource(id = R.string.profile_image),
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
