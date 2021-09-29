@@ -9,7 +9,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 
 @Composable
-fun ChatScreen(navController: NavController) {
+fun ChatScreen(onNavigate: (String) -> Unit = {},
+               onNavigateUp: () -> Unit = {},) {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
