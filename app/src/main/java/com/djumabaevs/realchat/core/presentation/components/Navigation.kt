@@ -22,8 +22,12 @@ import com.djumabaevs.realchat.feature_auth.presentation.register.RegisterScreen
 import com.djumabaevs.realchat.feature_post.presentation.person_list.PersonListScreen
 import com.djumabaevs.realchat.feature_profile.presentation.search.SearchScreen
 import com.djumabaevs.realchat.presentation.splash.SplashScreen
+import androidx.navigation.navArgument
+import coil.annotation.ExperimentalCoilApi
+import androidx.navigation.NavType
 
 
+@ExperimentalCoilApi
 @ExperimentalMaterialApi
 @Composable
 fun Navigation(
@@ -36,11 +40,14 @@ fun Navigation(
         modifier = Modifier.fillMaxSize()
     ) {
         composable(Screen.SplashScreen.route) {
-            SplashScreen(navController = navController)
+            SplashScreen(
+                onPopBackStack = navController::popBackStack,
+                onNavigate = navController::navigate
+            )
         }
         composable(Screen.LoginScreen.route) {
             LoginScreen(
-                navController = navController,
+                onNavigate = navController::navigate,
                 scaffoldState = scaffoldState
             )
         }
@@ -51,13 +58,23 @@ fun Navigation(
             )
         }
         composable(Screen.MainFeedScreen.route) {
-            MainFeedScreen(navController = navController, scaffoldState = scaffoldState)
+            MainFeedScreen(
+                onNavigateUp = navController::navigateUp,
+                onNavigate = navController::navigate,
+                scaffoldState = scaffoldState
+            )
         }
         composable(Screen.ChatScreen.route) {
-            ChatScreen(navController = navController)
+            ChatScreen(
+                onNavigateUp = navController::navigateUp,
+                onNavigate = navController::navigate,
+            )
         }
         composable(Screen.ActivityScreen.route) {
-            ActivityScreen(navController = navController)
+            ActivityScreen(
+                onNavigateUp = navController::navigateUp,
+                onNavigate = navController::navigate,
+            )
         }
         composable(Screen.ProfileScreen.route) {
             ProfileScreen(navController = navController)
