@@ -22,7 +22,8 @@ import com.djumabaevs.realchat.feature_activtiy.domain.ActivityAction
 
 @Composable
 fun ActivityScreen(
-    navController: NavController,
+    onNavigate: (String) -> Unit = {},
+    onNavigateUp: () -> Unit = {},
     viewModel: ActivityViewModel = hiltViewModel()
 ) {
     Column(
@@ -30,7 +31,7 @@ fun ActivityScreen(
             .fillMaxSize()
     ) {
         StandardToolbar(
-            navController = navController,
+            onNavigateUp = onNavigateUp,
             title = {
                 Text(
                     text = stringResource(id = R.string.your_activity),
