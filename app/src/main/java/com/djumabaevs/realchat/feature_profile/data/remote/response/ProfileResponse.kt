@@ -1,6 +1,6 @@
 package com.djumabaevs.realchat.feature_profile.data.remote.response
 
-
+import com.djumabaevs.realchat.feature_profile.domain.model.Profile
 
 
 data class ProfileResponse(

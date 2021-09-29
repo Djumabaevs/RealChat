@@ -38,8 +38,10 @@ import com.djumabaevs.realchat.core.presentation.ui.theme.ProfilePictureSizeLarg
 import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceMedium
 import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceSmall
 import com.djumabaevs.realchat.core.presentation.util.UiEvent
+import com.djumabaevs.realchat.core.presentation.util.asString
 import com.djumabaevs.realchat.core.util.Screen
 import com.djumabaevs.realchat.core.util.toPx
+import kotlinx.coroutines.flow.collectLatest
 
 @ExperimentalCoilApi
 @Composable
@@ -147,7 +149,7 @@ fun ProfileScreen(
                         .height(SpaceMedium)
                 )
                 Post(
-                    post = Post(
+                    post = com.djumabaevs.realchat.core.domain.models.Post(
                         username = "Bakyt Djumabaev",
                         imageUrl = "",
                         profilePictureUrl = "",
@@ -201,7 +203,7 @@ fun ProfileScreen(
                     painter = rememberImagePainter(
                         data = profile.profilePictureUrl
                     ),
-                    contentDescription = stringResource(id = androidx.compose.foundation.layout.R.string.profile_image),
+                    contentDescription = stringResource(id = R.string.profile_image),
                     modifier = Modifier
                         .align(Alignment.CenterHorizontally)
                         .graphicsLayer {

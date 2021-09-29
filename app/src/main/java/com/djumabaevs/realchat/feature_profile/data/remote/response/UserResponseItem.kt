@@ -1,5 +1,7 @@
 package com.djumabaevs.realchat.feature_profile.data.remote.response
 
+import com.djumabaevs.realchat.feature_profile.domain.model.UserItem
+
 data class UserResponseItem(
     val userId: String,
     val username: String,

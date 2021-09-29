@@ -1,6 +1,7 @@
 package com.djumabaevs.realchat.feature_profile.data.remote
 
 import com.djumabaevs.realchat.core.data.dto.response.BasicApiResponse
+import com.djumabaevs.realchat.feature_profile.data.remote.response.ProfileResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 

@@ -1,5 +1,10 @@
 package com.djumabaevs.realchat.di
 
+import com.djumabaevs.realchat.feature_profile.data.remote.ProfileApi
+import com.djumabaevs.realchat.feature_profile.data.repository.ProfileRepositoryImpl
+import com.djumabaevs.realchat.feature_profile.domain.repository.ProfileRepository
+import com.djumabaevs.realchat.feature_profile.domain.use_case.GetProfileUseCase
+import com.djumabaevs.realchat.feature_profile.domain.use_case.ProfileUseCases
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

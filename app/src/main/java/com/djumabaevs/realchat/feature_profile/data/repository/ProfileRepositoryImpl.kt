@@ -1,5 +1,11 @@
 package com.djumabaevs.realchat.feature_profile.data.repository
 
+import com.djumabaevs.realchat.R
+import com.djumabaevs.realchat.core.util.Resource
+import com.djumabaevs.realchat.core.util.UiText
+import com.djumabaevs.realchat.feature_profile.data.remote.ProfileApi
+import com.djumabaevs.realchat.feature_profile.domain.model.Profile
+import com.djumabaevs.realchat.feature_profile.domain.repository.ProfileRepository
 import retrofit2.HttpException
 import java.io.IOException
 
