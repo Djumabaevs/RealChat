@@ -24,18 +24,20 @@ import com.djumabaevs.realchat.core.presentation.components.UserProfileItem
 import com.djumabaevs.realchat.core.presentation.ui.theme.IconSizeMedium
 import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceLarge
 import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceMedium
+import com.djumabaevs.realchat.core.util.Screen
 
 @ExperimentalMaterialApi
 @Composable
 fun SearchScreen(
-    navController: NavController,
+    onNavigate: (String) -> Unit = {},
+    onNavigateUp: () -> Unit = {},
     viewModel: SearchViewModel = hiltViewModel()
 ) {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
         StandardToolbar(
-            navController = navController,
+            onNavigateUp = onNavigateUp,
             showBackArrow = true,
             title = {
                 Text(
@@ -70,6 +72,7 @@ fun SearchScreen(
                 items(10) {
                     UserProfileItem(
                         user = User(
+                            userId = "6127d2001241f332c88eb9a2",
                             profilePictureUrl = "",
                             username = "Bakyt Djumabaev",
                             description = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed\n" +
@@ -86,6 +89,12 @@ fun SearchScreen(
                                 tint = MaterialTheme.colors.onBackground,
                                 modifier = Modifier.size(IconSizeMedium)
                             )
+                        },
+                        onItemClick = {
+                            onNavigate(
+                                Screen.ProfileScreen.route + "?userId=6127d2001241f332c88eb9a2"
+                            )
+
                         }
                     )
                     Spacer(modifier = Modifier.height(SpaceMedium))
