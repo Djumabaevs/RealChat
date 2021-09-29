@@ -16,7 +16,7 @@ import com.djumabaevs.realchat.R
 
 @Composable
 fun StandardToolbar(
-    navController: NavController,
+    onNavigateUp: () -> Unit = {},
     modifier: Modifier = Modifier,
     showBackArrow: Boolean = false,
     navActions: @Composable RowScope.() -> Unit = {},
@@ -28,7 +28,7 @@ fun StandardToolbar(
         navigationIcon = if(showBackArrow) {
             {
                 IconButton(onClick = {
-                    navController.navigateUp()
+                    onNavigateUp()
                 }) {
                     Icon(
                         imageVector = Icons.Default.ArrowBack,
