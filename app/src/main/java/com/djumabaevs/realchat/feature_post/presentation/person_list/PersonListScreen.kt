@@ -24,13 +24,14 @@ import com.djumabaevs.realchat.R
 @ExperimentalMaterialApi
 @Composable
 fun PersonListScreen(
-    navController: NavController
+    onNavigate: (String) -> Unit = {},
+    onNavigateUp: () -> Unit = {},
 ) {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
         StandardToolbar(
-            navController = navController,
+            onNavigateUp = onNavigateUp,
             showBackArrow = true,
             title = {
                 Text(
@@ -47,6 +48,7 @@ fun PersonListScreen(
             items(10) {
                 UserProfileItem(
                     user = User(
+                        userId = "6127d2001241f332c88eb9a2",
                         profilePictureUrl = "",
                         username = "Bakyt Djumabaev",
                         description = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed\n" +

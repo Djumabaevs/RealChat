@@ -27,14 +27,15 @@ import com.djumabaevs.realchat.core.presentation.ui.theme.*
 
 @Composable
 fun PostDetailScreen(
-    navController: NavController,
+    onNavigate: (String) -> Unit = {},
+    onNavigateUp: () -> Unit = {},
     post: Post
 ) {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
         StandardToolbar(
-            navController = navController,
+            onNavigateUp = onNavigateUp,
             title = {
                 Text(
                     text = stringResource(id = R.string.your_feed),
