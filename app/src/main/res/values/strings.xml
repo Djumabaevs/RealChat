@@ -69,4 +69,5 @@
     <string name="error_description_blank">The description can\'t be empty</string>
     <string name="error_no_image_picked">Please pick a photo</string>
     <string name="post_created">Successfully created post</string>
+
 </resources>

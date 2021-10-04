@@ -22,12 +22,11 @@ import com.djumabaevs.realchat.feature_auth.presentation.register.RegisterScreen
 import com.djumabaevs.realchat.feature_post.presentation.person_list.PersonListScreen
 import com.djumabaevs.realchat.feature_profile.presentation.search.SearchScreen
 import com.djumabaevs.realchat.presentation.splash.SplashScreen
-import androidx.navigation.navArgument
-import coil.annotation.ExperimentalCoilApi
 import androidx.navigation.NavType
+import androidx.navigation.compose.navArgument
 
 
-@ExperimentalCoilApi
+
 @ExperimentalMaterialApi
 @Composable
 fun Navigation(
@@ -92,10 +91,18 @@ fun Navigation(
                 scaffoldState = scaffoldState
             )
         }
-        composable(Screen.EditProfileScreen.route) {
+        composable(
+            Screen.EditProfileScreen.route + "/{userId}",
+            arguments = listOf(
+                navArgument(name = "userId") {
+                    type = NavType.StringType
+                }
+            )
+        ) {
             EditProfileScreen(
                 onNavigateUp = navController::navigateUp,
                 onNavigate = navController::navigate,
+                scaffoldState = scaffoldState
             )
         }
         composable(Screen.CreatePostScreen.route) {
