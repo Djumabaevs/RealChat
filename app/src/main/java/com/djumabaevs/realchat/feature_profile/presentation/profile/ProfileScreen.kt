@@ -138,7 +138,7 @@ fun ProfileScreen(
                         ),
                         isOwnProfile = profile.isOwnProfile,
                         onEditClick = {
-                            onNavigate(Screen.EditProfileScreen.route)
+                            onNavigate(Screen.EditProfileScreen.route + "/${profile.userId}")
                         }
                     )
                 }
