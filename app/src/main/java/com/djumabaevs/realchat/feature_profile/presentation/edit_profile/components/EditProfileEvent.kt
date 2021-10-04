@@ -1,4 +1,4 @@
-package com.djumabaevs.realchat.feature_profile.presentation.edit_profile
+package com.djumabaevs.realchat.feature_profile.presentation.edit_profile.components
 
 import android.net.Uri
 
