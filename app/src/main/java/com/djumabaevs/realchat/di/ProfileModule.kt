@@ -5,6 +5,7 @@ import com.djumabaevs.realchat.feature_profile.data.repository.ProfileRepository
 import com.djumabaevs.realchat.feature_profile.domain.repository.ProfileRepository
 import com.djumabaevs.realchat.feature_profile.domain.use_case.GetProfileUseCase
 import com.djumabaevs.realchat.feature_profile.domain.use_case.ProfileUseCases
+import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,8 +32,8 @@ object ProfileModule {
 
     @Provides
     @Singleton
-    fun provideProfileRepository(api: ProfileApi): ProfileRepository {
-        return ProfileRepositoryImpl(api)
+    fun provideProfileRepository(api: ProfileApi, gson: Gson): ProfileRepository {
+        return ProfileRepositoryImpl(api, gson)
     }
 
     @Provides
