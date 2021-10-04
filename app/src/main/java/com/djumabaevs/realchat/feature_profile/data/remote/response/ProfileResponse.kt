@@ -29,7 +29,7 @@ data class ProfileResponse(
             postCount = postCount,
             profilePictureUrl = profilePictureUrl,
             bannerUrl = bannerUrl,
-            topSkillUrls = topSkillUrls,
+            topSkills = topSkills.map { it.toSkill() },
             gitHubUrl = gitHubUrl,
             instagramUrl = instagramUrl,
             linkedInUrl = linkedInUrl,
