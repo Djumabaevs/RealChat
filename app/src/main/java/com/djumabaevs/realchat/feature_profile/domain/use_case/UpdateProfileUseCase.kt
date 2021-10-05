@@ -1,6 +1,12 @@
 package com.djumabaevs.realchat.feature_profile.domain.use_case
 
 import android.net.Uri
+import com.djumabaevs.realchat.R
+import com.djumabaevs.realchat.core.util.Resource
+import com.djumabaevs.realchat.core.util.SimpleResource
+import com.djumabaevs.realchat.core.util.UiText
+import com.djumabaevs.realchat.feature_profile.domain.model.UpdateProfileData
+import com.djumabaevs.realchat.feature_profile.domain.repository.ProfileRepository
 
 class UpdateProfileUseCase(
     private val repository: ProfileRepository

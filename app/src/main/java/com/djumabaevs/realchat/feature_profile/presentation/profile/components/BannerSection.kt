@@ -24,6 +24,7 @@ import com.djumabaevs.realchat.R
 import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceMedium
 import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceSmall
 import com.djumabaevs.realchat.core.util.toPx
+import com.djumabaevs.realchat.feature_profile.domain.model.Skill
 
 
 @ExperimentalCoilApi
@@ -77,7 +78,7 @@ fun BannerSection(
                 .align(Alignment.BottomStart)
                 .padding(SpaceSmall)
         ) {
-            topSkills.forEach { skillUrl ->
+            topSkills.forEach { skill ->
                 Spacer(modifier = Modifier.width(SpaceSmall))
                 Image(
                     painter = rememberImagePainter(
@@ -103,7 +104,7 @@ fun BannerSection(
                 .align(Alignment.BottomEnd)
                 .padding(SpaceSmall)
         ) {
-            if(shouldShowGitHub) {
+            if (shouldShowGitHub) {
                 IconButton(
                     onClick = onGitHubClick,
                     modifier = Modifier.size(iconSize)
@@ -115,7 +116,7 @@ fun BannerSection(
                     )
                 }
             }
-            if(shouldShowInstagram) {
+            if (shouldShowInstagram) {
                 IconButton(
                     onClick = onInstagramClick,
                     modifier = Modifier.size(iconSize)
@@ -127,7 +128,7 @@ fun BannerSection(
                     )
                 }
             }
-            if(shouldShowLinkedIn) {
+            if (shouldShowLinkedIn) {
                 IconButton(
                     onClick = onLinkedInClick,
                     modifier = Modifier.size(iconSize)

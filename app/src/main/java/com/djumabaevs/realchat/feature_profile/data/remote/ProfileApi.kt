@@ -22,7 +22,7 @@ interface ProfileApi {
     ): BasicApiResponse<Unit>
 
     @GET("/api/skills/get")
-    suspend fun getSkills(): List<prSkillDto>
+    suspend fun getSkills(): List<SkillDto>
 
     companion object {
         const val BASE_URL = "http://10.0.2.2:8001/"

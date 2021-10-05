@@ -4,7 +4,9 @@ import com.djumabaevs.realchat.feature_profile.data.remote.ProfileApi
 import com.djumabaevs.realchat.feature_profile.data.repository.ProfileRepositoryImpl
 import com.djumabaevs.realchat.feature_profile.domain.repository.ProfileRepository
 import com.djumabaevs.realchat.feature_profile.domain.use_case.GetProfileUseCase
+import com.djumabaevs.realchat.feature_profile.domain.use_case.GetSkillsUseCase
 import com.djumabaevs.realchat.feature_profile.domain.use_case.ProfileUseCases
+import com.djumabaevs.realchat.feature_profile.domain.use_case.UpdateProfileUseCase
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides

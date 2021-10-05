@@ -1,5 +1,7 @@
 package com.djumabaevs.realchat.feature_profile.data.remote.response
 
+import com.djumabaevs.realchat.feature_profile.domain.model.Skill
+
 data class SkillDto(
     val name: String,
     val imageUrl: String

@@ -14,9 +14,10 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.djumabaevs.realchat.R
 
+
 @Composable
 fun StandardToolbar(
-    onNavigateUp: () -> Unit = {},
+    navController: NavController,
     modifier: Modifier = Modifier,
     showBackArrow: Boolean = false,
     navActions: @Composable RowScope.() -> Unit = {},
@@ -28,7 +29,7 @@ fun StandardToolbar(
         navigationIcon = if(showBackArrow) {
             {
                 IconButton(onClick = {
-                    onNavigateUp()
+                    navController.navigateUp()
                 }) {
                     Icon(
                         imageVector = Icons.Default.ArrowBack,
@@ -42,4 +43,4 @@ fun StandardToolbar(
         backgroundColor = MaterialTheme.colors.surface,
         elevation = 0.dp
     )
-}
+}a
