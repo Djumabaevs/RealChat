@@ -122,9 +122,11 @@ fun ProfileScreen(
             state = lazyListState
         ) {
             item {
-                Spacer(modifier = Modifier.height(
-                    toolbarHeightExpanded - profilePictureSize / 2f
-                ))
+                Spacer(
+                    modifier = Modifier.height(
+                        toolbarHeightExpanded - profilePictureSize / 2f
+                    )
+                )
             }
             item {
                 state.profile?.let { profile ->
@@ -195,10 +197,12 @@ fun ProfileScreen(
                             translationX = (1f - toolbarState.expandedRatio) *
                                     -iconHorizontalCenterLength
                         },
-                    topSkillUrls = profile.topSkillUrls,
-                    shouldShowGitHub = profile.gitHubUrl != null,
-                    shouldShowInstagram = profile.instagramUrl != null,
-                    shouldShowLinkedIn = profile.linkedInUrl != null,
+                    topSkills = profile.topSkills.also {
+                        println("TOP SKILLS: $it")
+                    },
+                    shouldShowGitHub = profile.gitHubUrl != null && profile.gitHubUrl.isNotBlank(),
+                    shouldShowInstagram = profile.instagramUrl != null && profile.instagramUrl.isNotBlank(),
+                    shouldShowLinkedIn = profile.linkedInUrl != null && profile.linkedInUrl.isNotBlank(),
                     bannerUrl = profile.bannerUrl
                 )
                 Image(
