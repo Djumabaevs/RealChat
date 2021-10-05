@@ -85,10 +85,12 @@ fun ProfileScreen(
                     return Offset.Zero
                 }
                 val newOffset = viewModel.toolbarState.value.toolbarOffsetY + delta
-                viewModel.setToolbarOffsetY(newOffset.coerceIn(
-                    minimumValue = -maxOffset.toPx(),
-                    maximumValue = 0f
-                ))
+                viewModel.setToolbarOffsetY(
+                    newOffset.coerceIn(
+                        minimumValue = -maxOffset.toPx(),
+                        maximumValue = 0f
+                    )
+                )
                 viewModel.setExpandedRatio((viewModel.toolbarState.value.toolbarOffsetY + maxOffset.toPx()) / maxOffset.toPx())
                 return Offset.Zero
             }
