@@ -43,4 +43,4 @@ fun StandardToolbar(
         backgroundColor = MaterialTheme.colors.surface,
         elevation = 0.dp
     )
-}a
+}
