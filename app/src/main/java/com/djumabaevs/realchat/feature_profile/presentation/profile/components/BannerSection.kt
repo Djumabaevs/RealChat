@@ -1,5 +1,6 @@
 package com.djumabaevs.realchat.presentation.profile.components
 
+import android.graphics.Insets.add
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -10,12 +11,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import coil.ImageLoader
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
+import coil.decode.SvgDecoder
 import com.djumabaevs.realchat.R
 import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceMedium
 import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceSmall
@@ -77,7 +81,12 @@ fun BannerSection(
                 Spacer(modifier = Modifier.width(SpaceSmall))
                 Image(
                     painter = rememberImagePainter(
-                        data = skillUrl.imageUrl,
+                        data = skill.imageUrl,
+                        imageLoader = ImageLoader.Builder(LocalContext.current)
+                            .componentRegistry {
+                                add(SvgDecoder(LocalContext.current))
+                            }
+                            .build(),
                         builder = {
                             crossfade(true)
                         }
