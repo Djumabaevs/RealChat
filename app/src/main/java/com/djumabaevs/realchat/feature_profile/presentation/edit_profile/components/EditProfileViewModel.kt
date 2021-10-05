@@ -8,8 +8,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class EditProfileViewModel @Inject constructor(): ViewModel() {
+class EditProfileViewModel @Inject constructor(
 
+) : ViewModel() {
 
     private val _usernameState = mutableStateOf(StandardTextFieldState())
     val usernameState: State<StandardTextFieldState> = _usernameState
