@@ -59,14 +59,14 @@ fun EditProfileScreen(
                 IconButton(onClick = {}) {
                     Icon(
                         imageVector = Icons.Default.Check,
-                        contentDescription = stringResource(id = androidx.compose.foundation.layout.R.string.save_changes),
+                        contentDescription = stringResource(id = R.string.save_changes),
                         tint = MaterialTheme.colors.onBackground
                     )
                 }
             },
             title = {
                 Text(
-                    text = stringResource(id = androidx.compose.foundation.layout.R.string.edit_your_profile),
+                    text = stringResource(id = R.string.edit_your_profile),
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colors.onBackground
                 )
@@ -78,8 +78,8 @@ fun EditProfileScreen(
                 .verticalScroll(rememberScrollState())
         ) {
             BannerEditSection(
-                bannerImage = painterResource(id = androidx.compose.foundation.layout.R.drawable.channelart),
-                profileImage = painterResource(id = androidx.compose.foundation.layout.R.drawable.philipp),
+                bannerImage = painterResource(id = R.drawable.channelart),
+                profileImage = painterResource(id = R.drawable.bakyt),
                 profilePictureSize = profilePictureSize
             )
             Column(
@@ -92,7 +92,7 @@ fun EditProfileScreen(
                     modifier = Modifier
                         .fillMaxWidth(),
                     text = viewModel.usernameState.value.text,
-                    hint = stringResource(id = androidx.compose.foundation.layout.R.string.username),
+                    hint = stringResource(id = R.string.username),
                     error = viewModel.usernameState.value.error,
                     leadingIcon = Icons.Default.Person,
                     onValueChange = {
@@ -106,9 +106,9 @@ fun EditProfileScreen(
                     modifier = Modifier
                         .fillMaxWidth(),
                     text = viewModel.githubTextFieldState.value.text,
-                    hint = stringResource(id = androidx.compose.foundation.layout.R.string.github_profile_url),
+                    hint = stringResource(id = R.string.github_profile_url),
                     error = viewModel.githubTextFieldState.value.error,
-                    leadingIcon = ImageVector.vectorResource(id = androidx.compose.foundation.layout.R.drawable.ic_github_icon_1),
+                    leadingIcon = ImageVector.vectorResource(id = R.drawable.ic_github_icon_1),
                     onValueChange = {
                         viewModel.setGithubTextFieldState(
                             StandardTextFieldState(text = it)
@@ -120,9 +120,9 @@ fun EditProfileScreen(
                     modifier = Modifier
                         .fillMaxWidth(),
                     text = viewModel.instagramTextFieldState.value.text,
-                    hint = stringResource(id = androidx.compose.foundation.layout.R.string.instagram_profile_url),
+                    hint = stringResource(id = R.string.instagram_profile_url),
                     error = viewModel.instagramTextFieldState.value.error,
-                    leadingIcon = ImageVector.vectorResource(id = androidx.compose.foundation.layout.R.drawable.ic_instagram_glyph_1),
+                    leadingIcon = ImageVector.vectorResource(id = R.drawable.ic_instagram_glyph_1),
                     onValueChange = {
                         viewModel.setInstagramTextFieldState(
                             StandardTextFieldState(text = it)
@@ -134,9 +134,9 @@ fun EditProfileScreen(
                     modifier = Modifier
                         .fillMaxWidth(),
                     text = viewModel.linkedInTextFieldState.value.text,
-                    hint = stringResource(id = androidx.compose.foundation.layout.R.string.linked_in_profile_url),
+                    hint = stringResource(id = R.string.linked_in_profile_url),
                     error = viewModel.linkedInTextFieldState.value.error,
-                    leadingIcon = ImageVector.vectorResource(id = androidx.compose.foundation.layout.R.drawable.ic_linkedin_icon_1),
+                    leadingIcon = ImageVector.vectorResource(id = R.drawable.ic_linkedin_icon_1),
                     onValueChange = {
                         viewModel.setLinkedInTextFieldState(
                             StandardTextFieldState(text = it)
@@ -148,7 +148,7 @@ fun EditProfileScreen(
                     modifier = Modifier
                         .fillMaxWidth(),
                     text = viewModel.bioState.value.text,
-                    hint = stringResource(id = androidx.compose.foundation.layout.R.string.your_bio),
+                    hint = stringResource(id = R.string.your_bio),
                     error = viewModel.bioState.value.error,
                     singleLine = false,
                     maxLines = 3,
@@ -161,7 +161,7 @@ fun EditProfileScreen(
                 )
                 Spacer(modifier = Modifier.height(SpaceMedium))
                 Text(
-                    text = stringResource(id = androidx.compose.foundation.layout.R.string.select_top_3_skills),
+                    text = stringResource(id = R.string.select_top_3_skills),
                     style = MaterialTheme.typography.h2,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.align(Alignment.CenterHorizontally)
