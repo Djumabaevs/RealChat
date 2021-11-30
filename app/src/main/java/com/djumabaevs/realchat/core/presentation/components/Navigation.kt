@@ -1,5 +1,6 @@
 package com.djumabaevs.realchat.core.presentation.components
 
+import android.content.Intent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ScaffoldState
@@ -22,16 +23,20 @@ import com.djumabaevs.realchat.feature_auth.presentation.register.RegisterScreen
 import com.djumabaevs.realchat.feature_post.presentation.person_list.PersonListScreen
 import com.djumabaevs.realchat.feature_profile.presentation.search.SearchScreen
 import com.djumabaevs.realchat.presentation.splash.SplashScreen
+import androidx.navigation.navArgument
+import coil.annotation.ExperimentalCoilApi
 import androidx.navigation.NavType
-import androidx.navigation.compose.navArgument
+import androidx.navigation.navDeepLink
+import coil.ImageLoader
 
 
-
+@ExperimentalCoilApi
 @ExperimentalMaterialApi
 @Composable
 fun Navigation(
     navController: NavHostController,
-    scaffoldState: ScaffoldState
+    scaffoldState: ScaffoldState,
+    imageLoader: ImageLoader
 ) {
     NavHost(
         navController = navController,
@@ -41,12 +46,19 @@ fun Navigation(
         composable(Screen.SplashScreen.route) {
             SplashScreen(
                 onPopBackStack = navController::popBackStack,
-                onNavigate = navController::navigate
+                onNavigate = navController::navigate,
             )
         }
         composable(Screen.LoginScreen.route) {
             LoginScreen(
                 onNavigate = navController::navigate,
+                onLogin = {
+                    navController.popBackStack(
+                        route = Screen.LoginScreen.route,
+                        inclusive = true
+                    )
+                    navController.navigate(route = Screen.MainFeedScreen.route)
+                },
                 scaffoldState = scaffoldState
             )
         }
@@ -60,13 +72,42 @@ fun Navigation(
             MainFeedScreen(
                 onNavigateUp = navController::navigateUp,
                 onNavigate = navController::navigate,
-                scaffoldState = scaffoldState
+                scaffoldState = scaffoldState,
+                imageLoader = imageLoader
             )
         }
         composable(Screen.ChatScreen.route) {
             ChatScreen(
                 onNavigateUp = navController::navigateUp,
                 onNavigate = navController::navigate,
+                imageLoader = imageLoader
+            )
+        }
+        composable(
+            route = Screen.MessageScreen.route + "/{chatId}/{remoteUserId}/{remoteUsername}/{remoteUserProfilePictureUrl}",
+            arguments = listOf(
+                navArgument("chatId") {
+                    type = NavType.StringType
+                },
+                navArgument("remoteUserId") {
+                    type = NavType.StringType
+                },
+                navArgument("remoteUsername") {
+                    type = NavType.StringType
+                },
+                navArgument("remoteUserProfilePictureUrl") {
+                    type = NavType.StringType
+                }
+            )
+        ) {
+            val remoteUsername = it.arguments?.getString("remoteUsername")!!
+            val remoteUserProfilePictureUrl = it.arguments?.getString("remoteUserProfilePictureUrl")!!
+            MessageScreen(
+                remoteUsername = remoteUsername,
+                encodedRemoteUserProfilePictureUrl = remoteUserProfilePictureUrl,
+                onNavigateUp = navController::navigateUp,
+                onNavigate = navController::navigate,
+                imageLoader = imageLoader
             )
         }
         composable(Screen.ActivityScreen.route) {
@@ -86,9 +127,13 @@ fun Navigation(
             )
         ) {
             ProfileScreen(
-                onNavigateUp = navController::navigateUp,
+                userId = it.arguments?.getString("userId"),
+                onLogout = {
+                    navController.navigate(route = Screen.LoginScreen.route)
+                },
                 onNavigate = navController::navigate,
-                scaffoldState = scaffoldState
+                scaffoldState = scaffoldState,
+                imageLoader = imageLoader
             )
         }
         composable(
@@ -102,44 +147,70 @@ fun Navigation(
             EditProfileScreen(
                 onNavigateUp = navController::navigateUp,
                 onNavigate = navController::navigate,
-                scaffoldState = scaffoldState
+                scaffoldState = scaffoldState,
+                imageLoader = imageLoader
             )
         }
         composable(Screen.CreatePostScreen.route) {
             CreatePostScreen(
                 onNavigateUp = navController::navigateUp,
                 onNavigate = navController::navigate,
-                scaffoldState = scaffoldState
+                scaffoldState = scaffoldState,
+                imageLoader = imageLoader
             )
         }
         composable(Screen.SearchScreen.route) {
             SearchScreen(
                 onNavigateUp = navController::navigateUp,
                 onNavigate = navController::navigate,
+                imageLoader = imageLoader
             )
         }
-        composable(Screen.PostDetailScreen.route) {
+        composable(
+            route = Screen.PostDetailScreen.route + "/{postId}?shouldShowKeyboard={shouldShowKeyboard}",
+            arguments = listOf(
+                navArgument(
+                    name = "postId"
+                ) {
+                    type = NavType.StringType
+                },
+                navArgument(
+                    name = "shouldShowKeyboard"
+                ) {
+                    type = NavType.BoolType
+                    defaultValue = false
+                }
+            ),
+            deepLinks = listOf(
+                navDeepLink {
+                    action = Intent.ACTION_VIEW
+                    uriPattern = "https://pl-coding.com/{postId}"
+                }
+            )
+        ) {
+            val shouldShowKeyboard = it.arguments?.getBoolean("shouldShowKeyboard") ?: false
+            println("POST ID: ${it.arguments?.getString("postId")}")
             PostDetailScreen(
+                scaffoldState = scaffoldState,
                 onNavigateUp = navController::navigateUp,
                 onNavigate = navController::navigate,
-                post = Post(
-                    username = "Bakyt Djumabaev",
-                    imageUrl = "",
-                    profilePictureUrl = "",
-                    description = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed\n" +
-                            "diam nonumy eirmod tempor invidunt ut labore et dolore \n" +
-                            "magna aliquyam erat, sed diam voluptua Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed\\n\" +\n" +
-                            "                    \"diam nonumy eirmod tempor invidunt ut labore et dolore \\n\" +\n" +
-                            "                    \"magna aliquyam erat, sed diam voluptua",
-                    likeCount = 17,
-                    commentCount = 7
-                )
+                shouldShowKeyboard = shouldShowKeyboard,
+                imageLoader = imageLoader
             )
         }
-        composable(Screen.PersonListScreen.route) {
+        composable(
+            route = Screen.PersonListScreen.route + "/{parentId}",
+            arguments = listOf(
+                navArgument("parentId") {
+                    type = NavType.StringType
+                }
+            )
+        ) {
             PersonListScreen(
                 onNavigateUp = navController::navigateUp,
                 onNavigate = navController::navigate,
+                scaffoldState = scaffoldState,
+                imageLoader = imageLoader
             )
         }
     }

@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -31,17 +32,26 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.ImageLoader
+import coil.annotation.ExperimentalCoilApi
+import coil.compose.rememberImagePainter
 import com.djumabaevs.realchat.R
 import com.djumabaevs.realchat.core.domain.models.Post
 import com.djumabaevs.realchat.core.presentation.ui.theme.*
 import com.djumabaevs.realchat.core.util.Constants
 
+@ExperimentalCoilApi
 @Composable
 fun Post(
     post: Post,
+    imageLoader: ImageLoader,
     modifier: Modifier = Modifier,
     showProfileImage: Boolean = true,
-    onPostClick: () -> Unit = {}
+    onPostClick: () -> Unit = {},
+    onLikeClick: () -> Unit = {},
+    onCommentClick: () -> Unit = {},
+    onShareClick: () -> Unit = {},
+    onUsernameClick: () -> Unit = {},
 ) {
     Box(
         modifier = modifier
@@ -51,9 +61,11 @@ fun Post(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .offset(y = if (showProfileImage) {
-                    ProfilePictureSizeMedium / 2f
-                } else 0.dp)
+                .offset(
+                    y = if (showProfileImage) {
+                        ProfilePictureSizeMedium / 2f
+                    } else 0.dp
+                )
                 .clip(MaterialTheme.shapes.medium)
                 .shadow(5.dp)
                 .background(MediumGray)
@@ -62,8 +74,14 @@ fun Post(
                 }
         ) {
             Image(
-                painterResource(id = R.drawable.kermit),
-                contentDescription = "Post image"
+                painter = rememberImagePainter(
+                    data = post.imageUrl,
+                    imageLoader = imageLoader
+                ),
+                contentDescription = "Post image",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.fillMaxWidth()
+                    .aspectRatio(16f/9f)
             )
             Column(
                 modifier = Modifier
@@ -71,20 +89,13 @@ fun Post(
                     .padding(SpaceMedium)
             ) {
                 ActionRow(
-                    username = "Bakyt Djumabaev",
+                    username = post.username,
                     modifier = Modifier.fillMaxWidth(),
-                    onLikeClick = { isLiked ->
-
-                    },
-                    onCommentClick = {
-
-                    },
-                    onShareClick = {
-
-                    },
-                    onUsernameClick = { username ->
-
-                    }
+                    isLiked = post.isLiked,
+                    onLikeClick = onLikeClick,
+                    onCommentClick = onCommentClick,
+                    onShareClick = onShareClick,
+                    onUsernameClick = onUsernameClick
                 )
                 Spacer(modifier = Modifier.height(SpaceSmall))
                 Text(
@@ -96,8 +107,8 @@ fun Post(
                             )
                         ) {
                             append(
-                                LocalContext.current.getString(
-                                    R.string.read_more
+                                " " + LocalContext.current.getString(
+                                    androidx.compose.foundation.layout.R.string.read_more
                                 )
                             )
                         }
@@ -114,7 +125,7 @@ fun Post(
                 ) {
                     Text(
                         text = stringResource(
-                            id = R.string.liked_by_x_people,
+                            id = androidx.compose.foundation.layout.R.string.x_likes,
                             post.likeCount
                         ),
                         fontWeight = FontWeight.Bold,
@@ -123,7 +134,7 @@ fun Post(
                     )
                     Text(
                         text = stringResource(
-                            id = R.string.x_comments,
+                            id = androidx.compose.foundation.layout.R.string.x_comments,
                             post.commentCount
                         ),
                         fontWeight = FontWeight.Bold,
@@ -135,7 +146,10 @@ fun Post(
         }
         if (showProfileImage) {
             Image(
-                painterResource(id = R.drawable.bakyt),
+                painter = rememberImagePainter(
+                    data = post.profilePictureUrl,
+                    imageLoader = imageLoader
+                ),
                 contentDescription = "Profile picture",
                 modifier = Modifier
                     .size(ProfilePictureSizeMedium)
@@ -151,7 +165,7 @@ fun EngagementButtons(
     modifier: Modifier = Modifier,
     isLiked: Boolean = false,
     iconSize: Dp = 30.dp,
-    onLikeClick: (Boolean) -> Unit = {},
+    onLikeClick: () -> Unit = {},
     onCommentClick: () -> Unit = {},
     onShareClick: () -> Unit = {},
 ) {
@@ -162,21 +176,21 @@ fun EngagementButtons(
     ) {
         IconButton(
             onClick = {
-                onLikeClick(!isLiked)
+                onLikeClick()
             },
             modifier = Modifier.size(iconSize)
         ) {
             Icon(
                 imageVector = Icons.Filled.Favorite,
                 tint = if (isLiked) {
-                    Color.Red
+                    MaterialTheme.colors.primary
                 } else {
                     TextWhite
                 },
                 contentDescription = if (isLiked) {
-                    stringResource(id = R.string.unlike)
+                    stringResource(id = androidx.compose.foundation.layout.R.string.unlike)
                 } else {
-                    stringResource(id = R.string.like)
+                    stringResource(id = androidx.compose.foundation.layout.R.string.like)
                 }
             )
         }
@@ -189,7 +203,7 @@ fun EngagementButtons(
         ) {
             Icon(
                 imageVector = Icons.Filled.Comment,
-                contentDescription = stringResource(id = R.string.comment)
+                contentDescription = stringResource(id = androidx.compose.foundation.layout.R.string.comment)
             )
         }
         Spacer(modifier = Modifier.width(SpaceMedium))
@@ -201,7 +215,7 @@ fun EngagementButtons(
         ) {
             Icon(
                 imageVector = Icons.Filled.Share,
-                contentDescription = stringResource(id = R.string.share)
+                contentDescription = stringResource(id = androidx.compose.foundation.layout.R.string.share)
             )
         }
     }
@@ -211,11 +225,11 @@ fun EngagementButtons(
 fun ActionRow(
     modifier: Modifier = Modifier,
     isLiked: Boolean = false,
-    onLikeClick: (Boolean) -> Unit = {},
+    onLikeClick: () -> Unit = {},
     onCommentClick: () -> Unit = {},
     onShareClick: () -> Unit = {},
     username: String,
-    onUsernameClick: (String) -> Unit = {}
+    onUsernameClick: () -> Unit = {}
 ) {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -230,7 +244,7 @@ fun ActionRow(
             ),
             modifier = Modifier
                 .clickable {
-                    onUsernameClick(username)
+                    onUsernameClick()
                 }
         )
         EngagementButtons(
