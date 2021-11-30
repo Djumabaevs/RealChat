@@ -7,6 +7,8 @@ import com.djumabaevs.realchat.core.util.Constants
 import com.djumabaevs.realchat.core.util.Resource
 import com.djumabaevs.realchat.core.util.SimpleResource
 import com.djumabaevs.realchat.feature_profile.domain.model.Profile
+import com.djumabaevs.realchat.feature_profile.domain.model.Skill
+import com.djumabaevs.realchat.feature_profile.domain.model.UpdateProfileData
 
 interface ProfileRepository {
 

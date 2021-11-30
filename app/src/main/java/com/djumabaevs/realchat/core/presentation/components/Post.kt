@@ -108,7 +108,7 @@ fun Post(
                         ) {
                             append(
                                 " " + LocalContext.current.getString(
-                                    androidx.compose.foundation.layout.R.string.read_more
+                                    R.string.read_more
                                 )
                             )
                         }
@@ -125,7 +125,7 @@ fun Post(
                 ) {
                     Text(
                         text = stringResource(
-                            id = androidx.compose.foundation.layout.R.string.x_likes,
+                            id = R.string.x_likes,
                             post.likeCount
                         ),
                         fontWeight = FontWeight.Bold,
@@ -134,7 +134,7 @@ fun Post(
                     )
                     Text(
                         text = stringResource(
-                            id = androidx.compose.foundation.layout.R.string.x_comments,
+                            id = R.string.x_comments,
                             post.commentCount
                         ),
                         fontWeight = FontWeight.Bold,
@@ -188,9 +188,9 @@ fun EngagementButtons(
                     TextWhite
                 },
                 contentDescription = if (isLiked) {
-                    stringResource(id = androidx.compose.foundation.layout.R.string.unlike)
+                    stringResource(id = R.string.unlike)
                 } else {
-                    stringResource(id = androidx.compose.foundation.layout.R.string.like)
+                    stringResource(id = R.string.like)
                 }
             )
         }
@@ -203,7 +203,7 @@ fun EngagementButtons(
         ) {
             Icon(
                 imageVector = Icons.Filled.Comment,
-                contentDescription = stringResource(id = androidx.compose.foundation.layout.R.string.comment)
+                contentDescription = stringResource(id = R.string.comment)
             )
         }
         Spacer(modifier = Modifier.width(SpaceMedium))
@@ -215,7 +215,7 @@ fun EngagementButtons(
         ) {
             Icon(
                 imageVector = Icons.Filled.Share,
-                contentDescription = stringResource(id = androidx.compose.foundation.layout.R.string.share)
+                contentDescription = stringResource(id = R.string.share)
             )
         }
     }

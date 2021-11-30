@@ -12,6 +12,8 @@ import com.djumabaevs.realchat.core.util.UiText
 import com.djumabaevs.realchat.feature_post.data.data_source.remote.PostApi
 import com.djumabaevs.realchat.feature_profile.data.remote.ProfileApi
 import com.djumabaevs.realchat.feature_profile.domain.model.Profile
+import com.djumabaevs.realchat.feature_profile.domain.model.Skill
+import com.djumabaevs.realchat.feature_profile.domain.model.UpdateProfileData
 import com.djumabaevs.realchat.feature_profile.domain.model.UserItem
 import com.djumabaevs.realchat.feature_profile.domain.repository.ProfileRepository
 import com.google.gson.Gson

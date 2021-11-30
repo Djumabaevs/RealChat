@@ -1,46 +1,99 @@
 package com.djumabaevs.realchat.core.presentation.components
 
-import androidx.compose.foundation.layout.RowScope
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.TopAppBar
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import coil.ImageLoader
+import coil.annotation.ExperimentalCoilApi
+import coil.compose.rememberImagePainter
 import com.djumabaevs.realchat.R
+import com.djumabaevs.realchat.core.domain.models.UserItem
+import com.djumabaevs.realchat.core.presentation.ui.theme.IconSizeMedium
+import com.djumabaevs.realchat.core.presentation.ui.theme.ProfilePictureSizeSmall
+import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceMedium
+import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceSmall
 
-
+@ExperimentalCoilApi
+@ExperimentalMaterialApi
 @Composable
-fun StandardToolbar(
-    navController: NavController,
+fun UserProfileItem(
+    user: UserItem,
+    imageLoader: ImageLoader,
     modifier: Modifier = Modifier,
-    showBackArrow: Boolean = false,
-    navActions: @Composable RowScope.() -> Unit = {},
-    title: @Composable () -> Unit = {},
+    actionIcon: @Composable () -> Unit = {},
+    onItemClick: () -> Unit = {},
+    onActionItemClick: () -> Unit = {},
+    ownUserId: String = ""
 ) {
-    TopAppBar(
-        title = title,
+    Card(
         modifier = modifier,
-        navigationIcon = if(showBackArrow) {
-            {
-                IconButton(onClick = {
-                    navController.navigateUp()
-                }) {
-                    Icon(
-                        imageVector = Icons.Default.ArrowBack,
-                        contentDescription = stringResource(id = R.string.back),
-                        tint = MaterialTheme.colors.onBackground
+        shape = MaterialTheme.shapes.medium,
+        onClick = onItemClick,
+        elevation = 5.dp
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(
+                    vertical = SpaceSmall,
+                    horizontal = SpaceMedium
+                ),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Image(
+                painter = rememberImagePainter(
+                    data = user.profilePictureUrl,
+                    imageLoader = imageLoader
+                ),
+                contentDescription = null,
+                modifier = Modifier
+                    .size(ProfilePictureSizeSmall)
+                    .clip(CircleShape)
+            )
+            Column(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .padding(horizontal = SpaceSmall)
+                    .weight(1f)
+            ) {
+                Text(
+                    text = user.username,
+                    style = MaterialTheme.typography.body1.copy(
+                        fontWeight = FontWeight.Bold
                     )
+                )
+                Spacer(modifier = Modifier.height(SpaceSmall))
+                Text(
+                    text = user.bio,
+                    style = MaterialTheme.typography.body2,
+                    overflow = TextOverflow.Ellipsis,
+                    maxLines = 2,
+                    modifier = Modifier.heightIn(
+                        min = MaterialTheme.typography.body2.fontSize.value.dp * 3f
+                    )
+                )
+            }
+            if(user.userId != ownUserId) {
+                IconButton(
+                    onClick = onActionItemClick,
+                    modifier = Modifier.size(IconSizeMedium)
+                ) {
+                    actionIcon()
                 }
             }
-        } else null,
-        actions = navActions,
-        backgroundColor = MaterialTheme.colors.surface,
-        elevation = 0.dp
-    )
+        }
+    }
 }

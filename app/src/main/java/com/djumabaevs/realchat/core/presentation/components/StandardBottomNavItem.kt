@@ -28,8 +28,8 @@ import com.djumabaevs.realchat.core.presentation.ui.theme.SpaceSmall
 @Composable
 @Throws(IllegalArgumentException::class)
 fun RowScope.StandardBottomNavItem(
-    icon: ImageVector? = null,
     modifier: Modifier = Modifier,
+    icon: ImageVector? = null,
     contentDescription: String? = null,
     selected: Boolean = false,
     alertCount: Int? = null,
@@ -38,7 +38,6 @@ fun RowScope.StandardBottomNavItem(
     enabled: Boolean = true,
     onClick: () -> Unit
 ) {
-
     if (alertCount != null && alertCount < 0) {
         throw IllegalArgumentException("Alert count can't be negative")
     }
@@ -78,6 +77,8 @@ fun RowScope.StandardBottomNavItem(
                                 cap = StrokeCap.Round
                             )
                         }
+
+
                     }
             ) {
                 if(icon != null) {
@@ -111,5 +112,4 @@ fun RowScope.StandardBottomNavItem(
             }
         }
     )
-
 }

@@ -19,6 +19,7 @@
     <string name="read_more">Read more</string>
     <string name="liked_by_x_people">Liked by %d people</string>
     <string name="x_comments">%d comments</string>
+    <string name="x_likes">%d likes</string>
     <string name="home">Home</string>
     <string name="chat">Chat</string>
     <string name="activity">Activity</string>
@@ -73,4 +74,5 @@
     <string name="error_couldnt_load_skills">Oops! Couldn\'t load skills</string>
     <string name="error_username_empty">The username can\'t be empty.</string>
     <string name="updated_profile">Successfully updated profile</string>
+    <string name="send_comment">Send comment</string>
 </resources>

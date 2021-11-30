@@ -10,6 +10,8 @@ import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
@@ -25,18 +27,17 @@ import com.djumabaevs.realchat.core.presentation.ui.theme.IconSizeMedium
 import com.djumabaevs.realchat.core.util.TestTags
 
 
-var i = 0
-
 @Composable
 fun StandardTextField(
     modifier: Modifier = Modifier,
     text: String = "",
     hint: String = "",
-    maxLength: Int = 40,
+    maxLength: Int = 400,
     error: String = "",
     style: TextStyle = TextStyle(
         color = MaterialTheme.colors.onBackground
     ),
+    backgroundColor: Color = MaterialTheme.colors.surface,
     singleLine: Boolean = true,
     maxLines: Int = 1,
     leadingIcon: ImageVector? = null,
@@ -44,11 +45,13 @@ fun StandardTextField(
     isPasswordToggleDisplayed: Boolean = keyboardType == KeyboardType.Password,
     isPasswordVisible: Boolean = false,
     onPasswordToggleClick: (Boolean) -> Unit = {},
-    onValueChange: (String) -> Unit
+    onValueChange: (String) -> Unit,
+    focusRequester: FocusRequester = FocusRequester()
 ) {
     Column(
-        modifier = modifier
+        modifier = Modifier
             .fillMaxWidth()
+            .then(modifier)
     ) {
         TextField(
             value = text,
@@ -59,6 +62,9 @@ fun StandardTextField(
             },
             maxLines = maxLines,
             textStyle = style,
+            colors = TextFieldDefaults.textFieldColors(
+                backgroundColor = backgroundColor
+            ),
             placeholder = {
                 Text(
                     text = hint,
@@ -86,7 +92,7 @@ fun StandardTextField(
                 }
                 icon
             } else null,
-            trailingIcon = if(isPasswordToggleDisplayed) {
+            trailingIcon = if (isPasswordToggleDisplayed) {
                 val icon: @Composable () -> Unit = {
                     IconButton(
                         onClick = {
@@ -119,6 +125,7 @@ fun StandardTextField(
                 .semantics {
                     testTag = TestTags.STANDARD_TEXT_FIELD
                 }
+                .focusRequester(focusRequester = focusRequester),
         )
         if (error.isNotEmpty()) {
             Text(
