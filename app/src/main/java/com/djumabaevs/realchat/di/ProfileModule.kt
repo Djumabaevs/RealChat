@@ -1,5 +1,12 @@
 package com.djumabaevs.realchat.di
 
+import android.content.SharedPreferences
+import com.djumabaevs.realchat.feature_post.data.data_source.remote.PostApi
+import com.djumabaevs.realchat.feature_post.data.repository.PostRepositoryImpl
+import com.djumabaevs.realchat.feature_post.domain.repository.PostRepository
+import com.djumabaevs.realchat.feature_post.domain.use_case.CreatePostUseCase
+import com.djumabaevs.realchat.feature_post.domain.use_case.GetPostsForFollowsUseCase
+import com.djumabaevs.realchat.feature_post.domain.use_case.PostUseCases
 import com.djumabaevs.realchat.feature_profile.data.remote.ProfileApi
 import com.djumabaevs.realchat.feature_profile.data.repository.ProfileRepositoryImpl
 import com.djumabaevs.realchat.feature_profile.domain.repository.ProfileRepository
@@ -34,8 +41,8 @@ object ProfileModule {
 
     @Provides
     @Singleton
-    fun provideProfileRepository(api: ProfileApi, gson: Gson): ProfileRepository {
-        return ProfileRepositoryImpl(api, gson)
+    fun provideProfileRepository(profileApi: ProfileApi, postApi: PostApi, gson: Gson, sharedPreferences: SharedPreferences): ProfileRepository {
+        return ProfileRepositoryImpl(profileApi, postApi, gson, sharedPreferences)
     }
 
     @Provides
@@ -44,7 +51,18 @@ object ProfileModule {
         return ProfileUseCases(
             getProfile = GetProfileUseCase(repository),
             getSkills = GetSkillsUseCase(repository),
-            updateProfile = UpdateProfileUseCase(repository)
+            updateProfile = UpdateProfileUseCase(repository),
+            setSkillSelected = SetSkillSelectedUseCase(),
+            getPostsForProfile = GetPostsForProfileUseCase(repository),
+            searchUser = SearchUserUseCase(repository),
+            toggleFollowStateForUser = ToggleFollowStateForUserUseCase(repository),
+            logout = LogoutUseCase(repository)
         )
+    }
+
+    @Provides
+    @Singleton
+    fun provideToggleFollowForUserUseCase(repository: ProfileRepository): ToggleFollowStateForUserUseCase {
+        return ToggleFollowStateForUserUseCase(repository)
     }
 }
